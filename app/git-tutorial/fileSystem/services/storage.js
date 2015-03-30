@@ -1,11 +1,11 @@
 (function ()
 {
     'use strict';
-    function storage()
+    function Storage()
     {
         return window.localStorage;
     }
 
     var module = angular.module('commandFileSystem');
-    module.service('storage', [storage]);
+    module.service('Storage', [Storage]);
 })();

@@ -1,19 +1,19 @@
 (function ()
 {
     'use strict';
-    function fileSystem(config, pathTools, storage)
+    function FileSystem(config, pathTools, storage)
     {
 
         var fs = function ()
         {
-            var me = {};
+            var fileSystem = {};
             var _currentPath = config.directorySeparator;
 
             if (!storage.getItem(config.directorySeparator + '_dir')) {
                 storage.setItem(config.directorySeparator + '_dir', '_dir');
             }
 
-            me.path = function (path)
+            fileSystem.path = function (path)
             {
 
                 if (path === '..') {
@@ -33,7 +33,7 @@
                 return _currentPath;
             };
 
-            me.list = function ()
+            fileSystem.list = function ()
             {
                 var result = {
                     directories: [], files: []
@@ -47,7 +47,7 @@
                     if (pathTools.isFileOfPath(_currentPath, key)) {
                         result.files.push(pathTools.getPathItemName(key));
                     } else if (pathTools.isDirectoryOfPath(_currentPath, key)) {
-                        result.directories.push(pathTools.getPathItemName(key));
+                        result.directories.push(pathTools.getPathItemNafileSystem(key));
                     }
                 }
                 result.directories.sort();
@@ -55,7 +55,7 @@
                 return result;
             };
 
-            me.existsDir = function (path, failIfNotExist)
+            fileSystem.existsDir = function (path, failIfNotExist)
             {
 
                 if (!pathTools.isDirNameValid(path)) {
@@ -70,7 +70,7 @@
                 return exists;
             };
 
-            me.createDir = function (path)
+            fileSystem.createDir = function (path)
             {
 
                 if (!pathTools.isDirNameValid(path)) {
@@ -80,7 +80,7 @@
                 if (!pathTools.isDirNameValid(pathTools.getPathItemName(path))) {
                     throw new Error('Invalid directory name');
                 }
-                if (me.existsDir(path)) {
+                if (fileSystem.existsDir(path)) {
                     throw new Error('The directory already exists.');
                 } else {
                     var dirkey = pathTools.combine(_currentPath, path, '_dir');
@@ -88,14 +88,14 @@
                 }
             };
 
-            me.removeDir = function (path)
+            fileSystem.removeDir = function (path)
             {
                 console.log('Remove dir: ' + path + ' on: ' + _currentPath);
                 if (!pathTools.isDirNameValid(path)) {
                     throw new Error('The directory name is not valid');
                 }
 
-                if (me.existsDir(path, true)) {
+                if (fileSystem.existsDir(path, true)) {
                     var dirkey = pathTools.combine(_currentPath, path, '_dir');
                     path = pathTools.combine(_currentPath, path);
                     console.log('Full path: ' + path);
@@ -119,7 +119,7 @@
                 }
             };
 
-            me.writeFile = function (name, content)
+            fileSystem.writeFile = function (name, content)
             {
                 if (!pathTools.isFileNameValid(name)) {
                     throw new Error('Invalid file name');
@@ -132,7 +132,7 @@
                 storage.setItem(filekey, content);
             };
 
-            me.appendToFile = function (name, content)
+            fileSystem.appendToFile = function (name, content)
             {
                 if (!pathTools.isFileNameValid(name)) {
                     throw new Error('Invalid file name');
@@ -146,7 +146,7 @@
                 storage.setItem(filekey, (prevcontent ? prevcontent + '\n' : '') + content);
             };
 
-            me.deleteFile = function (name)
+            fileSystem.deleteFile = function (name)
             {
                 if (!pathTools.isFileNameValid(name)) {
                     throw new Error('Invalid file name');
@@ -158,7 +158,7 @@
                 storage.removeItem(filekey);
             };
 
-            me.readFile = function (name)
+            fileSystem.readFile = function (name)
             {
                 if (!pathTools.isFileNameValid(name)) {
                     throw new Error('Invalid file name');
@@ -172,11 +172,11 @@
                 return content;
             };
 
-            return me;
+            return fileSystem;
         };
         return fs();
     }
 
     var module = angular.module('commandFileSystem');
-    module.service('fileSystem', ['fileSystemConfiguration', 'pathTools', 'storage', fileSystem]);
+    module.service('FileSystem', ['FileSystemConfiguration', 'PathTools', 'Storage', FileSystem]);
 })();

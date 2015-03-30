@@ -1,22 +1,22 @@
 (function ()
 {
     'use strict';
-    function fileSystemConfiguration()
+    function FileSystemConfiguration()
     {
         var provider = function ()
         {
-            var me = {};
-            me.directorySeparator = '\\ ';
-            me.$get = [function ()
+            var fileSystemConfiguration = {};
+            fileSystemConfiguration.directorySeparator = '\\ ';
+            fileSystemConfiguration.$get = [function ()
                        {
-                           return me;
+                           return fileSystemConfiguration;
                        }];
-            return me;
+            return fileSystemConfiguration;
         };
 
         return provider();
     }
 
     var module = angular.module('commandFileSystem');
-    module.provider('fileSystemConfiguration', [fileSystemConfiguration]);
+    module.provider('FileSystemConfiguration', [FileSystemConfiguration]);
 })();

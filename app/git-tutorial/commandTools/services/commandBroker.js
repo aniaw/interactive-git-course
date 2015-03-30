@@ -1,20 +1,18 @@
 (function ()
 {
     'use strict';
-    function commandBroker()
+    function CommandBroker()
     {
         var provider = function ()
         {
-            var me = {};
-            me.handlers = [];
-            me.redirectors = [];
+            var commandBroker = {handlers: [], redirectors: []};
 
             var selectByRedirectors = function (commandParts)
             {
                 var result = [], r = [];
                 for (var i = 0; i < commandParts.length; i++) {
                     var cp = commandParts[i];
-                    var suitableRedirectors = me.redirectors.filter(function (r)
+                    var suitableRedirectors = commandBroker.redirectors.filter(function (r)
                     {
                         return r.command === cp;
                     });
@@ -33,7 +31,7 @@
                 return result;
             };
 
-            me.$get = ['$injector', 'commandLineSplitter', function ($injector, commandLineSplitter)
+            commandBroker.$get = ['$injector', 'CommandLineSplitter', function ($injector, CommandLineSplitter)
             {
                 return {
                     execute: function (session, consoleInput)
@@ -42,8 +40,7 @@
                         if (!consoleInput) {
                             return;
                         }
-
-                        var fullCommandParts = commandLineSplitter.split(consoleInput);
+                        var fullCommandParts = CommandLineSplitter.split(consoleInput);
 
                         var stackedParts = selectByRedirectors(fullCommandParts);
 
@@ -63,7 +60,7 @@
                                 continue;
                             }
 
-                            var suitableRedirectors = me.redirectors.filter(function (r)
+                            var suitableRedirectors = commandBroker.redirectors.filter(function (r)
                             {
                                 return r.command === p;
                             });
@@ -76,8 +73,9 @@
                                 };
                             } else {
 
-                                var suitableHandlers = me.handlers.filter(function (item)
+                                var suitableHandlers = commandBroker.handlers.filter(function (item)
                                 {
+                                    console.log(p);
                                     return p.length && item.command === p[0].toLowerCase();
                                 });
 
@@ -96,32 +94,32 @@
 
                     init: function ()
                     { // inject dependencies on commands
-                        // this method should run in '.config()' time, but also does the command addition,
-                        // so run it at '.run()' time makes more sense and ensure all commands are already present.
+                        // this commandBrokerthod should run in '.config()' ticommandBroker, but also does the command addition,
+                        // so run it at '.run()' ticommandBroker makes more sense and ensure all commands are already present.
                         var inject = function (handler)
                         {
                             if (handler.init) {
                                 $injector.invoke(handler.init);
                             }
                         };
-                        for (var i = 0; i < me.handlers.length; i++) {
-                            inject(me.handlers[i]);
+                        for (var i = 0; i < commandBroker.handlers.length; i++) {
+                            inject(commandBroker.handlers[i]);
 
                         }
-                        for (var i = 0; i < me.redirectors.length; i++) {
-                            inject(me.redirectors[i]);
+                        for (var j = 0; j < commandBroker.redirectors.length; j++) {
+                            inject(commandBroker.redirectors[j]);
                         }
                     }
                 };
             }];
 
-            me.appendCommandHandler = function (handler)
+            commandBroker.appendCommandHandler = function (handler)
             {
                 if (!handler || !handler.command || !handler.handle || !handler.description) {
                     throw new Error('Invalid command handler');
                 }
 
-                var suitableHandlers = me.handlers.filter(function (item)
+                var suitableHandlers = commandBroker.handlers.filter(function (item)
                 {
                     return item.command === handler.command;
                 });
@@ -130,16 +128,16 @@
                     throw new Error('There is already a handler for that command.');
                 }
 
-                me.handlers.push(handler);
+                commandBroker.handlers.push(handler);
             };
 
-            me.appendRedirectorHandler = function (handler)
+            commandBroker.appendRedirectorHandler = function (handler)
             {
                 if (!handler || !handler.command || !handler.handle) {
                     throw new Error('Invalid redirect handler');
                 }
 
-                var suitableHandlers = me.redirectors.filter(function (item)
+                var suitableHandlers = commandBroker.redirectors.filter(function (item)
                 {
                     return item.command === handler.command;
                 });
@@ -148,23 +146,23 @@
                     throw new Error('There is already a handler for that redirection.');
                 }
 
-                me.redirectors.push(handler);
+                commandBroker.redirectors.push(handler);
             };
 
-            me.describe = function ()
+            commandBroker.describe = function ()
             {
-                return me.handlers.map(function (item)
+                return commandBroker.handlers.map(function (item)
                 {
                     return {command: item.command, description: item.description};
                 });
             };
 
-            return me;
+            return commandBroker;
         };
 
         return provider();
     }
 
     var module = angular.module('commandTools');
-    module.provider('commandBroker', [commandBroker]);
+    module.provider('CommandBroker', [CommandBroker]);
 })();

@@ -1,6 +1,6 @@
 ﻿'use strict';
 angular.module('commandTools', [])
 
-.run(['commandBroker', function (commandBroker) {
-    commandBroker.init();
+.run(['CommandBroker', function (CommandBroker) {
+    CommandBroker.init();
 }]);

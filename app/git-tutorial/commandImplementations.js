@@ -1,17 +1,17 @@
 ﻿'use strict';
 angular.module('commandImplementations', ['commandTools'])
 
-        .config(['commandBrokerProvider', function (commandBrokerProvider)
+        .config(['CommandBrokerProvider', function (CommandBrokerProvider)
         {
 
-            commandBrokerProvider.appendCommandHandler({
+            CommandBrokerProvider.appendCommandHandler({
                 command: 'version', description: ['Shows this software version.'], handle: function (session)
                 {
                     session.output.push({output: true, text: ['Version 0.1 Beta'], breakLine: true});
                 }
             });
 
-            commandBrokerProvider.appendCommandHandler({
+            CommandBrokerProvider.appendCommandHandler({
                 command: 'clear', description: ['Clears the screen.'], handle: function (session)
                 {
                     session.commands.push({command: 'clear'});
@@ -19,7 +19,7 @@ angular.module('commandImplementations', ['commandTools'])
             });
 
 
-            commandBrokerProvider.appendCommandHandler({
+            CommandBrokerProvider.appendCommandHandler({
                 command: 'echo', description: ['Echoes input.'], handle: function (session)
                 {
                     var a = Array.prototype.slice.call(arguments, 1);
@@ -28,44 +28,11 @@ angular.module('commandImplementations', ['commandTools'])
             });
 
 
-            var suCommandHandler = function ()
-            {
-                var me = {};
-                var ga = null;
-                me.command = 'su';
-                me.description = ['Changes the  user identity.', 'Syntax: su <userName>', 'Example: su vtortola'];
-                me.init = ['$ga', function ($ga)
-                {
-                    ga = $ga;
-                }];
-                me.handle = function (session, login)
-                {
-                    if (!login) {
-                        session.output.push({
-                            output: true, text: ['The <userName> parameter is required.', 'Type "help su" to get a hint.'], breakLine: true
-                        });
-                        return;
-                    }
-
-                    ga('set', {userId: login.toString()});
-                    session.login = login;
-                    session.commands.push({command: 'change-prompt', prompt: {user: login}});
-                    session.output.push({output: true, text: ['Identity changed.'], breakLine: true});
-                };
-                return me;
-            };
-            commandBrokerProvider.appendCommandHandler(suCommandHandler());
-
             var feedbackCommandHandler = function ()
             {
                 var me = {};
-                var _ga = null;
                 me.command = 'feedback';
                 me.description = ['Sends a feedback message to the author.', 'Example: feedback This application is awesome! Where may I donate?'];
-                me.init = ['$ga', function ($ga)
-                {
-                    _ga = $ga;
-                }];
                 me.handle = function (session, param)
                 {
                     param = Array.prototype.slice.call(arguments, 1);
@@ -76,13 +43,12 @@ angular.module('commandImplementations', ['commandTools'])
                     } else {
                         outText.push('Your message have been sent.');
                         outText.push('Thanks for the feedback!.');
-                        _ga('send', 'event', 'Console', 'Feedback', param);
                     }
                     session.output.push({output: true, text: outText, breakLine: true});
                 };
                 return me;
             };
-            commandBrokerProvider.appendCommandHandler(feedbackCommandHandler());
+            CommandBrokerProvider.appendCommandHandler(feedbackCommandHandler());
 
             // this must be the last
             var helpCommandHandler = function ()
@@ -93,7 +59,7 @@ angular.module('commandImplementations', ['commandTools'])
                 me.description = ['Provides instructions about how to use this terminal'];
                 me.handle = function (session, cmd)
                 {
-                    var list = commandBrokerProvider.describe();
+                    var list = CommandBrokerProvider.describe();
                     var outText = [];
                     if (cmd) {
                         for (var i = 0; i < list.length; i++) {
@@ -126,5 +92,5 @@ angular.module('commandImplementations', ['commandTools'])
                 };
                 return me;
             };
-            commandBrokerProvider.appendCommandHandler(helpCommandHandler());
+            CommandBrokerProvider.appendCommandHandler(helpCommandHandler());
         }]);

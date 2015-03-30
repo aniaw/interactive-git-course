@@ -1,12 +1,12 @@
 (function ()
 {
     'use strict';
-    function pathTools(config)
+    function PathTools(config)
     {
-        var pathT = function ()
+        var pt = function ()
         {
-            var me = {};
-            me.isAbsolute = function (path)
+            var pathTools = {};
+            pathTools.isAbsolute = function (path)
             {
                 if (!path || path.length < config.directorySeparator.length) {
                     return false;
@@ -14,7 +14,7 @@
                 return path.substring(0, config.directorySeparator.length) === config.directorySeparator;
             };
 
-            me.addDirectorySeparator = function (path)
+            pathTools.addDirectorySeparator = function (path)
             {
                 if (path.substr(path.length - config.directorySeparator.length, config.directorySeparator.length) !== config.directorySeparator) {
                     path += config.directorySeparator;
@@ -22,28 +22,28 @@
                 return path;
             };
 
-            me.addRootDirectorySeparator = function (path)
+            pathTools.addRootDirectorySeparator = function (path)
             {
-                if (!me.isAbsolute(path)) {
+                if (!pathTools.isAbsolute(path)) {
                     return config.directorySeparator + path;
                 }
                 return path;
             };
 
-            me.combine = function ()
+            pathTools.combine = function ()
             {
                 var result = '';
                 for (var i = 0; i < arguments.length; i++) {
 
                     var arg = arguments[i];
 
-                    if (i !== 0 && me.isAbsolute(arg)) {
+                    if (i !== 0 && pathTools.isAbsolute(arg)) {
                         throw new Error('When combining a path, only the first element can an absolute path.');
                     } else if (i === 0) {
-                        arg = me.addRootDirectorySeparator(arg);
+                        arg = pathTools.addRootDirectorySeparator(arg);
                     }
                     if (i !== arguments.length - 1) {
-                        arg = me.addDirectorySeparator(arg);
+                        arg = pathTools.addDirectorySeparator(arg);
                     }
 
                     result += arg;
@@ -52,7 +52,7 @@
                 return result;
             };
 
-            me.directoryUp = function (path)
+            pathTools.directoryUp = function (path)
             {
                 if (path === config.directorySeparator) {
                     return path;
@@ -74,14 +74,14 @@
                     return config.directorySeparator;
                 }
 
-                return me.combine.apply(me, parts);
+                return pathTools.combine.apply(pathTools, parts);
             };
 
-            me.isFileOfPath = function (basePath, path)
+            pathTools.isFileOfPath = function (basePath, path)
             {
                 if (path.substr(0, basePath.length) === basePath) {
                     var sp = path.substr(basePath.length);
-                    if (me.isAbsolute(sp) && sp.indexOf(config.directorySeparator) === sp.lastIndexOf(config.directorySeparator)) {
+                    if (pathTools.isAbsolute(sp) && sp.indexOf(config.directorySeparator) === sp.lastIndexOf(config.directorySeparator)) {
                         sp = sp.substr(config.directorySeparator.length);
                         return sp !== '_dir';
                     } else {
@@ -92,7 +92,7 @@
                 return false;
             };
 
-            me.isDirectoryOfPath = function (basePath, path)
+            pathTools.isDirectoryOfPath = function (basePath, path)
             {
                 if (path.substr(0, basePath.length) === basePath) {
                     var sp = path.substr(basePath.length);
@@ -107,7 +107,7 @@
                 return false;
             };
 
-            me.getPathItemName = function (path)
+            pathTools.getPathItemName = function (path)
             {
                 var parts = path.split(config.directorySeparator);
                 var last = parts[parts.length - 1];
@@ -125,22 +125,22 @@
             };
 
             var fileNameValidator = /^[\w_.\-]+$/;
-            me.isFileNameValid = function (name)
+            pathTools.isFileNameValid = function (name)
             {
                 return !!name && name[0] !== '_' && !!name.match(fileNameValidator);
             };
 
             var dirNameValidator = /^[\w_\-]+$/;
-            me.isDirNameValid = function (name)
+            pathTools.isDirNameValid = function (name)
             {
                 return !!name && name[0] !== '_' && !!name.match(dirNameValidator);
             };
 
-            return me;
+            return pathTools;
         };
-        return pathT();
+        return pt();
     }
 
     var module = angular.module('commandFileSystem');
-    module.service('pathTools', ['fileSystemConfiguration', pathTools]);
+    module.service('PathTools', ['FileSystemConfiguration', PathTools]);
 })();

@@ -1,7 +1,7 @@
 ﻿'use strict';
 angular.module('commandFileSystem', ['commandTools'])
 
-        .config(['commandBrokerProvider', function (commandBrokerProvider)
+        .config(['CommandBrokerProvider', function (CommandBrokerProvider)
         {
             var pwdCommand = function ()
             {
@@ -9,9 +9,9 @@ angular.module('commandFileSystem', ['commandTools'])
                 var fs = null;
                 me.command = 'pwd';
                 me.description = ['Shows current directory.'];
-                me.init = ['fileSystem', function (fileSystem)
+                me.init = ['FileSystem', function (FileSystem)
                 {
-                    fs = fileSystem;
+                    fs = FileSystem;
                 }];
                 me.handle = function (session)
                 {
@@ -19,7 +19,7 @@ angular.module('commandFileSystem', ['commandTools'])
                 };
                 return me;
             };
-            commandBrokerProvider.appendCommandHandler(pwdCommand());
+            CommandBrokerProvider.appendCommandHandler(pwdCommand());
 
             var cdCommand = function ()
             {
@@ -27,9 +27,9 @@ angular.module('commandFileSystem', ['commandTools'])
                 var fs = null;
                 me.command = 'cd';
                 me.description = ['Changes directory.', 'Syntax: cd <path>', 'Example: cd myDirectory', 'Example: cd ..'];
-                me.init = ['fileSystem', function (fileSystem)
+                me.init = ['FileSystem', function (FileSystem)
                 {
-                    fs = fileSystem;
+                    fs = FileSystem;
                 }];
                 me.handle = function (session, path)
                 {
@@ -40,7 +40,7 @@ angular.module('commandFileSystem', ['commandTools'])
                 };
                 return me;
             };
-            commandBrokerProvider.appendCommandHandler(cdCommand());
+            CommandBrokerProvider.appendCommandHandler(cdCommand());
 
             var mkdirCommand = function ()
             {
@@ -48,9 +48,9 @@ angular.module('commandFileSystem', ['commandTools'])
                 var fs = null;
                 me.command = 'mkdir';
                 me.description = ['Creates directory.', 'Syntax: mkdir <directoryName>', 'Example: mkdir myDirectory'];
-                me.init = ['fileSystem', function (fileSystem)
+                me.init = ['FileSystem', function (FileSystem)
                 {
-                    fs = fileSystem;
+                    fs = FileSystem;
                 }];
                 me.handle = function (session, path)
                 {
@@ -62,7 +62,7 @@ angular.module('commandFileSystem', ['commandTools'])
                 };
                 return me;
             };
-            commandBrokerProvider.appendCommandHandler(mkdirCommand());
+            CommandBrokerProvider.appendCommandHandler(mkdirCommand());
 
             var rmdirCommand = function ()
             {
@@ -70,9 +70,9 @@ angular.module('commandFileSystem', ['commandTools'])
                 var fs = null;
                 me.command = 'rmdir';
                 me.description = ['Removes directory.', 'Syntax: rmdir <directoryName>', 'Example: rmdir myDirectory'];
-                me.init = ['fileSystem', function (fileSystem)
+                me.init = ['FileSystem', function (FileSystem)
                 {
-                    fs = fileSystem;
+                    fs = FileSystem;
                 }];
                 me.handle = function (session, path)
                 {
@@ -84,7 +84,7 @@ angular.module('commandFileSystem', ['commandTools'])
                 };
                 return me;
             };
-            commandBrokerProvider.appendCommandHandler(rmdirCommand());
+            CommandBrokerProvider.appendCommandHandler(rmdirCommand());
 
             var lsCommand = function ()
             {
@@ -92,9 +92,9 @@ angular.module('commandFileSystem', ['commandTools'])
                 var fs = null;
                 me.command = 'ls';
                 me.description = ['List directory contents'];
-                me.init = ['fileSystem', function (fileSystem)
+                me.init = ['FileSystem', function (FileSystem)
                 {
-                    fs = fileSystem;
+                    fs = FileSystem;
                 }];
                 me.handle = function (session)
                 {
@@ -114,7 +114,7 @@ angular.module('commandFileSystem', ['commandTools'])
                 };
                 return me;
             };
-            commandBrokerProvider.appendCommandHandler(lsCommand());
+            CommandBrokerProvider.appendCommandHandler(lsCommand());
 
             var catCommand = function ()
             {
@@ -122,9 +122,9 @@ angular.module('commandFileSystem', ['commandTools'])
                 var fs = null;
                 me.command = 'cat';
                 me.description = ['Reads file.', 'Syntax: cat <fileName>', 'Example: cat file.txt'];
-                me.init = ['fileSystem', function (fileSystem)
+                me.init = ['FileSystem', function (FileSystem)
                 {
-                    fs = fileSystem;
+                    fs = FileSystem;
                 }];
                 me.handle = function (session, path)
                 {
@@ -137,7 +137,7 @@ angular.module('commandFileSystem', ['commandTools'])
                 };
                 return me;
             };
-            commandBrokerProvider.appendCommandHandler(catCommand());
+            CommandBrokerProvider.appendCommandHandler(catCommand());
 
             var rmCommand = function ()
             {
@@ -145,9 +145,9 @@ angular.module('commandFileSystem', ['commandTools'])
                 var fs = null;
                 me.command = 'rm';
                 me.description = ['Removes file.', 'Syntax: rm <fileName>', 'Example: rm file.txt'];
-                me.init = ['fileSystem', function (fileSystem)
+                me.init = ['FileSystem', function (FileSystem)
                 {
-                    fs = fileSystem;
+                    fs = FileSystem;
                 }];
                 me.handle = function (session, path)
                 {
@@ -159,16 +159,16 @@ angular.module('commandFileSystem', ['commandTools'])
                 };
                 return me;
             };
-            commandBrokerProvider.appendCommandHandler(rmCommand());
+            CommandBrokerProvider.appendCommandHandler(rmCommand());
 
             var createFileRedirection = function ()
             {
                 var me = {};
                 var fs = null;
                 me.command = '>';
-                me.init = ['fileSystem', function (fileSystem)
+                me.init = ['FileSystem', function (FileSystem)
                 {
-                    fs = fileSystem;
+                    fs = FileSystem;
                 }];
                 me.handle = function (session, path)
                 {
@@ -191,16 +191,16 @@ angular.module('commandFileSystem', ['commandTools'])
                 };
                 return me;
             };
-            commandBrokerProvider.appendRedirectorHandler(createFileRedirection());
+            CommandBrokerProvider.appendRedirectorHandler(createFileRedirection());
 
             var appendFileRedirection = function ()
             {
                 var me = {};
                 var fs = null;
                 me.command = '>>';
-                me.init = ['fileSystem', function (fileSystem)
+                me.init = ['FileSystem', function (FileSystem)
                 {
-                    fs = fileSystem;
+                    fs = FileSystem;
                 }];
                 me.handle = function (session, path)
                 {
@@ -223,10 +223,10 @@ angular.module('commandFileSystem', ['commandTools'])
                 };
                 return me;
             };
-            commandBrokerProvider.appendRedirectorHandler(appendFileRedirection());
+            CommandBrokerProvider.appendRedirectorHandler(appendFileRedirection());
         }])
 
-        .run(['fileSystemConfiguration', 'storage', function (fs, storage)
+        .run(['FileSystemConfiguration', 'Storage', function (fs, storage)
         {
             if (!storage.getItem(fs.directorySeparator + '_dir')) {
                 storage.setItem(fs.directorySeparator + '_dir', '_dir');

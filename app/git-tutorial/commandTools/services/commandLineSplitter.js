@@ -1,18 +1,18 @@
 (function ()
 {
     'use strict';
-    function commandLineSplitter()
+    function CommandLineSplitter()
     {
         var provider = function ()
         {
-            var me = {};
+            var commandLineSplitter = {};
             var brackets = ['{', '}'];
             brackets.keep = true;
-            me.separators = [['"'], ["'"], brackets];
+            commandLineSplitter.separators = [['"'], ["'"], brackets];
 
             var isOpener = function (c)
             {
-                var suitableOpeners = me.separators.filter(function (item)
+                var suitableOpeners = commandLineSplitter.separators.filter(function (item)
                 {
                     return item[0] === c;
                 });
@@ -25,7 +25,7 @@
                 }
             };
 
-            me.$get = function ()
+            commandLineSplitter.$get = function ()
             {
                 return {
                     split: function (input)
@@ -83,12 +83,12 @@
                     }
                 };
             };
-            return me;
+            return commandLineSplitter;
         };
 
         return provider();
     }
 
     var module = angular.module('commandTools');
-    module.provider('commandLineSplitter', [commandLineSplitter]);
+    module.provider('CommandLineSplitter', [CommandLineSplitter]);
 })();
