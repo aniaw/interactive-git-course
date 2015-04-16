@@ -7,7 +7,6 @@
         return {
             restrict: 'E',
             controller: 'TerminalController',
-            transclude: true,
             replace: true,
             templateUrl: 'ng-terminal/assets/templates/terminalTemplate.html',
             compile: function compile()
@@ -20,8 +19,8 @@
                         var consoleView = angular.element(element[0].querySelector('.terminal-viewport'));
                         var results = angular.element(element[0].querySelector('.terminal-results'));
                         var cursor = angular.element(element[0].querySelector('.terminal-cursor'));
-                        //var prompt = angular.element(element[0].querySelector('.terminal-prompt'));
-                        //var consoleInput = angular.element(element[0].querySelector('.terminal-input'));
+                        var prompt = angular.element(element[0].querySelector('.terminal-prompt'));
+                        var consoleInput = angular.element(element[0].querySelector('.terminal-input'));
 
                         if (navigator.appVersion.indexOf('Trident') !== -1) {
                             terminal.addClass('ie');
@@ -100,7 +99,6 @@
                             return scope.results;
                         }, function (newValues, oldValues)
                         {
-
                             if (oldValues.length && !newValues.length) { // removal detected
                                 var children = results.children();
                                 for (var i = 0; i < children.length; i++) {
@@ -124,7 +122,7 @@
                                 }
 
                                 newValue.displayed = true;
-
+                                console.log(newValue);
                                 for (var k = 0; k < newValue.text.length; k++) {
                                     var line = document.createElement('pre');
                                     line.textContent = newValue.output ? '  ' : '';

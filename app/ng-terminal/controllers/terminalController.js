@@ -9,7 +9,7 @@
 
         var promptCreator = function (p)
         {
-            return p.user + p.separator + p.path + p.end+ ' ';
+            return p.user + p.separator + p.path + p.end + ' ';
         };
 
         var cleanNonPrintableCharacters = function (input)
@@ -102,7 +102,7 @@
             }
 
             $scope.results.push({type: 'text', text: [$scope.prompt.text + command]});
-            $scope.$emit('terminal-input', [{command: command}]);
+            $scope.$emit('terminal-input', command);
 
             $scope.$apply();
         };
