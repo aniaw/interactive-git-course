@@ -1,8 +1,5 @@
 'use strict';
-// modules
-angular.module('ng-terminal', []);
 
-// app
 var app = angular.module('app', ['ngRoute', 'ng-terminal']);
 app.config(function ($routeProvider)
 {
@@ -27,17 +24,8 @@ app.factory('CommandList', function ()
 
 });
 
-app.controller('ConsoleController', function ($scope,CommandList)
+app.controller('ConsoleController', function ($scope, CommandList)
 {
-    //init message
-    //setTimeout(function ()
-    //{
-    //    $scope.$broadcast('terminal-output', {
-    //        output: true, text: ['Welcome to git-tutorial!', 'Please type "help" to open a list of commands'], breakLine: true
-    //    });
-    //    $scope.$apply();
-    //}, 100);
-
     $scope.session = {
         commands: [], output: []
     };
