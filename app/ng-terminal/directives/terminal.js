@@ -120,9 +120,7 @@
                                 if (newValue.displayed) {
                                     continue;
                                 }
-
                                 newValue.displayed = true;
-                                console.log(newValue);
                                 for (var k = 0; k < newValue.text.length; k++) {
                                     var line = document.createElement('pre');
                                     line.textContent = newValue.output ? '  ' : '';

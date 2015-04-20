@@ -1,0 +1,9 @@
+.commit {
+    /*color: red;*/
+}
+
+#elementID {
+    color: #fff;
+    text-shadow: 1px 1px 1px #ccc;
+    font-size: 1.5em;
+}

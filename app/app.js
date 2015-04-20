@@ -6,62 +6,76 @@ app.config(function ($routeProvider)
     $routeProvider.when('/', {
         controller: 'AppCtrl', templateUrl: 'start.html'
     });
-});
 
-app.controller('AppCtrl', function ()
-{
+    $routeProvider.when('/chapter/:id', {
+        controller: 'ConsoleCtrl', templateUrl: 'terminal.html'
+    });
+
+    $routeProvider.otherwise({
+        redirectTo: '/'
+    });
 
 });
 app.factory('CommandList', function ()
 {
     var commands = {};
     commands.list = [{
-        command: 'git status', description: 'opis do git status', output: 'zwracam status'
+        command: 'git init', description: 'opis do git init', output: 'zwracam git init', breakLine: true
     }, {
-        command: 'git init', description: 'opis do git init', output: 'zwracam git init'
+        command: 'git status', description: 'opis do git status', output: 'zwracam status'
     }];
     return commands;
 
 });
 
-app.controller('ConsoleController', function ($scope, CommandList)
+app.controller('AppCtrl', function ()
+{
+
+});
+
+
+app.controller('ConsoleCtrl', function ($scope, $routeParams, $location, CommandList)
 {
     $scope.session = {
         commands: [], output: []
     };
+    $scope.chapterId = $routeParams.id;
 
-    $scope.$watchCollection(function ()
-    {
-        return $scope.session.output;
-    }, function (currentValue)
-    {
-        for (var i = 0; i < currentValue.length; i++) {
-            $scope.$broadcast('terminal-output', currentValue[i]);
-        }
-        $scope.session.output.splice(0, $scope.session.output.length);
-        $scope.$$phase || $scope.$apply();
-    });
-
-    $scope.$on('terminal-input', function (e, consoleInput)
+    $scope.$on('terminal-input', function (event, consoleInput)
     {
         var tmp = {
             commands: [], output: []
         };
+        console.log(CommandList.list);
         try {
-            var commands = CommandList.list;
-            angular.forEach(commands, function (key, value)
-            {
-                if (consoleInput === key.command) {
-                    tmp.output.push({output: true, text: [key.output], breakLine: false});
-                }
-            });
-            angular.extend($scope.session, tmp);
-
+            var chapter = CommandList.list[$scope.chapterId];
+            console.log(chapter);
+            if (consoleInput === chapter.command) {
+                tmp.output.push({output: true, text: [chapter.output], breakLine: chapter.breakLine});
+                angular.extend($scope.session, tmp);
+                $scope.chapterId++;
+                $location.path('/chapter/' + $scope.chapterId);
+            } else {
+                console.log('error');
+            }
 
         } catch (err) {
             $scope.session.output.push({output: true, breakLine: true, text: [err.message]});
         }
     });
+
+
+    //$scope.$watchCollection(function ()
+    //{
+    //    return $scope.session.output;
+    //}, function (currentValue)
+    //{
+    //    if (currentValue !== undefined) {
+    //        $scope.$broadcast('terminal-output', currentValue[0]);
+    //        $scope.$$phase || $scope.$apply();
+    //
+    //    }
+    //});
 
 });
 
