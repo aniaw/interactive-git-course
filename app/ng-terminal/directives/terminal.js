@@ -123,7 +123,7 @@
                                 newValue.displayed = true;
                                 for (var k = 0; k < newValue.text.length; k++) {
                                     var line = document.createElement('pre');
-                                    line.textContent = newValue.output ? '  ' : '';
+                                    line.textContent = newValue.output ? ' ' : '';
                                     line.className = 'terminal-line';
                                     line.textContent += newValue.text[k];
                                     results[0].appendChild(line);

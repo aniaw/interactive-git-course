@@ -1,6 +1,6 @@
 'use strict';
 
-var app = angular.module('app', ['ngRoute', 'ng-terminal']);
+var app = angular.module('app', ['ngRoute', 'ng-terminal', 'hc.marked']);
 app.config(function ($routeProvider)
 {
     $routeProvider.when('/', {
@@ -16,66 +16,81 @@ app.config(function ($routeProvider)
     });
 
 });
-app.factory('CommandList', function ()
+
+app.factory('ChapterList', function ()
 {
-    var commands = {};
-    commands.list = [{
-        command: 'git init', description: 'opis do git init', output: 'zwracam git init', breakLine: true
-    }, {
-        command: 'git status', description: 'opis do git status', output: 'zwracam status'
-    }];
-    return commands;
+    var chapters = {};
+    chapters.list = [{
+        command: {git: 'git init', description: 'opis do git init', output: 'Initialized empty Git repository in git-project/.git/', breakLine: true},
+        files: [],
+        theory: '* **repozytorium** - struktura danych zawierająca historię projektu (zawartość katalogu **.git**). \n* polecenie ```git init``` inicjalizuje puste repozytorium (lokalne) w podkatalogu **.git** (bieżący katalog staje się katalogiem roboczym)',
+        exercise: 'Znajdujesz się w katalogu ```git-project```.\n Zainicjalizuj nowe repozytorium.'
+    },
+        {
+            command: {git: 'git status', description: 'opis do git status', output: 'On branch master \n Initial commit \n nothing to commit', breakLine: true},
+            files: [{name: '.git', folder: true, color: ''}],
+            theory: 'Polecenie ```git status``` sprawdza czy nastapily **zmiany lokalne**. Jeżeli tak zostanie wystosowany zostanie odpowiedni komunikat.',
+            exercise: ''
+        },
+        {
+            command: {git: 'git status', description: 'opis do git status', output: 'On branch master \n Initial commit \n nothing to commit', breakLine: true},
+            files: [{name: '.git', folder: true, color: ''}],
+            theory: [],
+            exercise: 'Polecenie 3'
+        }];
+
+
+    return chapters;
 
 });
 
-app.controller('AppCtrl', function ()
-{
-
-});
-
-
-app.controller('ConsoleCtrl', function ($scope, $routeParams, $location, CommandList)
+app.controller('AppCtrl', function ($scope)
 {
     $scope.session = {
         commands: [], output: []
     };
-    $scope.chapterId = $routeParams.id;
+
+});
+
+
+app.controller('ConsoleCtrl', function ($scope, $routeParams, $location, ChapterList)
+{
+
+    var chapterId = $routeParams.id;
+    var prevId = chapterId - 1;
+
+    var prevChapter = ChapterList.list[prevId];
+
+    $scope.fileStructure = ChapterList.list[chapterId].files;
+    console.log($scope.fileStructure);
+    $scope.theory = ChapterList.list[chapterId].theory;
+    $scope.exercise = ChapterList.list[chapterId].exercise;
+
+    setTimeout(function ()
+    {
+        if (prevId >= 0) {
+            $scope.$broadcast('terminal-output', {
+                output: true, text: [prevChapter.command.output], breakLine: prevChapter.command.breakLine
+            });
+            $scope.$apply();
+        }
+    }, 100);
 
     $scope.$on('terminal-input', function (event, consoleInput)
     {
-        var tmp = {
-            commands: [], output: []
-        };
-        console.log(CommandList.list);
-        try {
-            var chapter = CommandList.list[$scope.chapterId];
-            console.log(chapter);
-            if (consoleInput === chapter.command) {
-                tmp.output.push({output: true, text: [chapter.output], breakLine: chapter.breakLine});
-                angular.extend($scope.session, tmp);
-                $scope.chapterId++;
-                $location.path('/chapter/' + $scope.chapterId);
-            } else {
-                console.log('error');
-            }
 
-        } catch (err) {
-            $scope.session.output.push({output: true, breakLine: true, text: [err.message]});
+        var chapter = ChapterList.list[chapterId];
+        if (consoleInput === chapter.command.git) {
+            chapterId++;
+            $location.path('/chapter/' + chapterId);
+
+        } else {
+            console.log('er');
+            //$scope.session.output.push({output: true, breakLine: true, text: [err.message]});
         }
+
     });
 
-
-    //$scope.$watchCollection(function ()
-    //{
-    //    return $scope.session.output;
-    //}, function (currentValue)
-    //{
-    //    if (currentValue !== undefined) {
-    //        $scope.$broadcast('terminal-output', currentValue[0]);
-    //        $scope.$$phase || $scope.$apply();
-    //
-    //    }
-    //});
 
 });
 

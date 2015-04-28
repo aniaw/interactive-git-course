@@ -1,15 +1,17 @@
 <div class="col-md-3">
     <div class="panel panel-default">
-        <div class="panel-heading">Project Structure</div>
+        <div class="panel-heading">Struktura projektu</div>
         <div class="panel-body">
-            <p class="commit">
-                <i class="fa fa-folder-o"></i> shop </p>
-
             <p>
-                <i class="fa fa-file-o"></i> file.txt </p>
+                <i class="fa fa-folder-o"></i> git-project </p>
 
-            <p>
-                <i class="fa fa-file-text-o"></i> something.js </p>
+            <div ng-repeat="file in fileStructure">
+
+                <p ng-if="file.folder"><i class="fa fa-folder-o"></i> <span ng-style="{color: '{{file.color}}'}"> {{file.name}}</span></p>
+
+                <p ng-if="!file.folder"><i class="fa fa-file-text-o" ng-style="fStyle"></i> <span ng-style="{color: '{{file.color}}'}"> {{file.name}}</span></p>
+
+            </div>
         </div>
     </div>
 </div>
@@ -20,15 +22,16 @@
 
 <div class="col-md-4">
     <div class="panel panel-default">
-        <div class="panel-heading">Theory</div>
+        <div class="panel-heading">Teoria</div>
         <div class="panel-body">
-            Panel content
+            <div marked="theory"></div>
+
         </div>
     </div>
     <div class="panel panel-default">
-        <div class="panel-heading">Example</div>
+        <div class="panel-heading">Polecenie</div>
         <div class="panel-body">
-            Panel content
+            <div marked="exercise">*</div>
         </div>
     </div>
 </div>
