@@ -1,0 +1,49 @@
+<div class="top col-md-offset-3 col-md-5">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div marked="message"></div>
+
+        </div>
+    </div>
+</div>
+<div class="col-md-12">
+    <div class="col-md-3">
+        <div class="panel panel-default">
+            <div class="panel-heading">Struktura projektu</div>
+            <div class="panel-body">
+                <p>
+                    <i class="fa fa-folder-o"></i> git-project </p>
+
+                <div ng-repeat="file in fileStructure">
+
+                    <p ng-if="file.folder"><i class="fa fa-folder-o"></i> <span ng-style="{color: '{{file.color}}'}"> {{file.name}}</span></p>
+
+                    <p ng-if="!file.folder"><i class="fa fa-file-text-o" ng-style="fStyle"></i> <span ng-style="{color: '{{file.color}}'}"> {{file.name}}</span>
+                    </p>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-5">
+        <terminal></terminal>
+    </div>
+
+    <div class="col-md-4">
+        <div class="panel panel-default">
+            <div class="panel-heading">Teoria</div>
+            <div class="panel-body">
+                <div marked="theory"></div>
+
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">Polecenie</div>
+            <div class="panel-body">
+                <div marked="exercise">*</div>
+            </div>
+        </div>
+    </div>
+
+</div>

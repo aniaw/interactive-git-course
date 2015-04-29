@@ -2,32 +2,35 @@
 <html>
 <head lang="pl">
     <title>AngularJS Tutorials</title>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css">
-    <link rel="stylesheet" href="ng-terminal/assets/styles/ng-terminal.css"/>
+    <link rel="stylesheet" href="directives/ng-terminal/assets/styles/ng-terminal.css"/>
     <link rel="stylesheet" href="styles/project.css"/>
 
 </head>
 
 <body ng-app="app">
 <div class="container" ng-controller="AppCtrl">
-    <div class="row">
-        <div class="page-header">
-            <h1>Git tutorial </h1>
-        </div>
-        <ng-view></ng-view>
-    </div>
+
+    <ng-view></ng-view>
+
 </div>
 <script src="bower_components/angular/angular.js"></script>
 <script src="bower_components/angular-route/angular-route.js"></script>
 <script src="bower_components/marked/lib/marked.js"></script>
 <script src="bower_components/angular-marked/angular-marked.js"></script>
 
-<script src="ng-terminal/terminal.js"></script>
+<script src="directives/ng-terminal/terminal.js"></script>
 <script src="app.js"></script>
+<script src="config.route.js"></script>
+<script src="services/ChapterList.js"></script>
 
-<script src="ng-terminal/controllers/TerminalController.js"></script>
-<script src="ng-terminal/directives/terminal.js"></script>
+<script src="controllers/AppCtrl.js"></script>
+<script src="controllers/ConsoleCtrl.js"></script>
+
+<script src="directives/ng-terminal/controllers/TerminalController.js"></script>
+<script src="directives/ng-terminal/directives/terminal.js"></script>
 
 </body>
 </html>

@@ -8,7 +8,7 @@
             restrict: 'E',
             controller: 'TerminalController',
             replace: true,
-            templateUrl: 'ng-terminal/assets/templates/terminalTemplate.html',
+            templateUrl: 'directives/ng-terminal/assets/templates/terminalTemplate.html',
             compile: function compile()
             {
                 return {
