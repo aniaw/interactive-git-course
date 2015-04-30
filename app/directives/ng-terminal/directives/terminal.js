@@ -2,7 +2,7 @@
 {
     'use strict';
 
-    function terminal($document)
+    function terminal($document, $sce)
     {
         return {
             restrict: 'E',
@@ -19,8 +19,6 @@
                         var consoleView = angular.element(element[0].querySelector('.terminal-viewport'));
                         var results = angular.element(element[0].querySelector('.terminal-results'));
                         var cursor = angular.element(element[0].querySelector('.terminal-cursor'));
-                        var prompt = angular.element(element[0].querySelector('.terminal-prompt'));
-                        var consoleInput = angular.element(element[0].querySelector('.terminal-input'));
 
                         if (navigator.appVersion.indexOf('Trident') !== -1) {
                             terminal.addClass('ie');
@@ -121,18 +119,15 @@
                                     continue;
                                 }
                                 newValue.displayed = true;
-                                for (var k = 0; k < newValue.text.length; k++) {
+                                if ((newValue.text[0].indexOf(':>') !== -1)) {
                                     var line = document.createElement('pre');
-                                    line.textContent = newValue.output ? ' ' : '';
                                     line.className = 'terminal-line';
-                                    line.textContent += newValue.text[k];
+                                    line.textContent += newValue.text[0];
                                     results[0].appendChild(line);
-
-                                    if (!!newValue.breakLine) {
-                                        var breakLine = document.createElement('br');
-                                        results[0].appendChild(breakLine);
-                                    }
+                                } else {
+                                    scope.oki = $sce.trustAsHtml(newValue.text[0]);
                                 }
+
                             }
                             f[f.length - 1]();
                         });
@@ -144,6 +139,6 @@
     }
 
     var module = angular.module('ng-terminal');
-    module.directive('terminal', ['$document', terminal]);
+    module.directive('terminal', ['$document', '$sce', terminal]);
 })();
 

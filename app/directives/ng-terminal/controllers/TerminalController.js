@@ -14,7 +14,8 @@
 
         var cleanNonPrintableCharacters = function (input)
         {
-            return input.replace(/[^\x20-\x7E]+/g, '');
+            var tmpInput = input.replace(/\s+/g, ' ');
+            return tmpInput.replace(/[^\x20-\x7E]+/g, '');
         };
 
 
@@ -42,13 +43,10 @@
         $scope.$on('terminal-output', function (event, output)
         {
             $scope.results.push({type: 'text', text: [$scope.prompt.text + output.command]});
-            //$scope.$emit('terminal-input', command);
 
             if (!output.added) {
                 output.added = true;
                 $scope.results.push(output);
-
-
             }
 
         });

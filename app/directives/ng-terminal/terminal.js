@@ -1,1 +1,1 @@
-angular.module('ng-terminal', []);
+angular.module('ng-terminal', ['ngSanitize']);
