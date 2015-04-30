@@ -17,7 +17,6 @@
                         var terminal = element;
                         var target = angular.element(element[0].querySelector('.terminal-target'));
                         var consoleView = angular.element(element[0].querySelector('.terminal-viewport'));
-                        var results = angular.element(element[0].querySelector('.terminal-results'));
                         var cursor = angular.element(element[0].querySelector('.terminal-cursor'));
 
                         if (navigator.appVersion.indexOf('Trident') !== -1) {
@@ -97,12 +96,6 @@
                             return scope.results;
                         }, function (newValues, oldValues)
                         {
-                            if (oldValues.length && !newValues.length) { // removal detected
-                                var children = results.children();
-                                for (var i = 0; i < children.length; i++) {
-                                    children[i].remove();
-                                }
-                            }
 
                             scope.showPrompt = false;
 
@@ -120,10 +113,8 @@
                                 }
                                 newValue.displayed = true;
                                 if ((newValue.text[0].indexOf(':>') !== -1)) {
-                                    var line = document.createElement('pre');
-                                    line.className = 'terminal-line';
-                                    line.textContent += newValue.text[0];
-                                    results[0].appendChild(line);
+                                    scope.test = newValue.text[0];
+
                                 } else {
                                     scope.oki = $sce.trustAsHtml(newValue.text[0]);
                                 }

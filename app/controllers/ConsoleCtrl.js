@@ -3,17 +3,18 @@
     'use strict';
     angular.module('app').controller('ConsoleCtrl', function ($scope, $routeParams, $location, ChapterList)
     {
-        $scope.chapterId = $routeParams.id;
-        var chapter = ChapterList.list[$scope.chapterId];
-        var prevId = $scope.chapterId - 1;
+        var chapterId = $routeParams.id;
+        var chapter = ChapterList.list[chapterId];
+        var prevId = chapterId - 1;
         var prevChapter = ChapterList.list[prevId];
 
-        $scope.fileStructure = ChapterList.list[$scope.chapterId].files;
-        $scope.theory = ChapterList.list[$scope.chapterId].theory;
-        $scope.exercise = ChapterList.list[$scope.chapterId].exercise;
-        $scope.message = ChapterList.list[$scope.chapterId].message;
+        $scope.chapterId = chapterId;
+        $scope.fileStructure = ChapterList.list[chapterId].files;
+        $scope.theory = ChapterList.list[chapterId].theory;
+        $scope.exercise = ChapterList.list[chapterId].exercise;
+        $scope.message = ChapterList.list[chapterId].message;
         if (chapter.hasOwnProperty('add')) {
-            $scope.fileToAdd = ChapterList.list[$scope.chapterId].add.file;
+            $scope.fileToAdd = ChapterList.list[chapterId].add.file;
         }
         $scope.addition = chapter.hasOwnProperty('add');
 
@@ -36,21 +37,26 @@
 
         $scope.$on('terminal-input', function (event, consoleInput)
         {
+            consoleInput = consoleInput.trim();
             if (!chapter.hasOwnProperty('add')) {
                 if (consoleInput === chapter.command.git) {
-                    $scope.chapterId++;
-                    $location.path('/chapter/' + $scope.chapterId);
+                    $scope.session.commands.push(consoleInput);
+                    chapterId++;
+                    $location.path('/chapter/' + chapterId);
 
                 } else {
+                    $scope.session.commands.push(consoleInput);
                     console.log('er');
                     //$scope.session.output.push({output: true, text: [err.message]});
                 }
             } else if (chapter.hasOwnProperty('add') && chapter.add.displayed) {
                 if (consoleInput === chapter.command.git) {
-                    $scope.chapterId++;
-                    $location.path('/chapter/' + $scope.chapterId);
+                    $scope.session.commands.push(consoleInput);
+                    chapterId++;
+                    $location.path('/chapter/' + chapterId);
 
                 } else {
+                    $scope.session.commands.push(consoleInput);
                     console.log('er');
                     //$scope.session.output.push({output: true, text: [err.message]});
                 }

@@ -48,7 +48,6 @@
                 output.added = true;
                 $scope.results.push(output);
             }
-
         });
 
         //command line character limit (80)

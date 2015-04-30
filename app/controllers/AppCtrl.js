@@ -8,6 +8,12 @@
             commands: [], output: []
         };
 
+        $scope.$watch('session', function (newVal, oldVal)
+        {
+            //console.log(newVal);
+        }, true);
+
+
     });
 
 
