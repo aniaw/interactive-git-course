@@ -16,10 +16,10 @@
 
                 <div ng-repeat="file in fileStructure">
 
-                    <p ng-if="file.folder">    &#151; <i class="fa fa-folder-o" ng-style="{color: '{{file.color.file}}'}"></i> <span
+                    <p ng-if="file.folder">    └ <i class="fa fa-folder-o" ng-style="{color: '{{file.color.file}}'}"></i> <span
                             ng-style="{color: '{{file.color.text}}'}"> {{file.name}}</span></p>
 
-                    <p ng-if="!file.folder">    &#151; <i class="fa fa-file-o" ng-style="{color: '{{file.color.file}}'}"></i> <span
+                    <p ng-if="!file.folder">    └ <i class="fa fa-file-o" ng-style="{color: '{{file.color.file}}'}"></i> <span
                             ng-style="{color: '{{file.color.text}}'}"> {{file.name}}</span>
                     </p>
 
@@ -28,7 +28,7 @@
         </div>
     </div>
 
-    <div class="col-md-6">
+    <div class="col-md-6" auto-focus="true" >
         <terminal></terminal>
     </div>
 

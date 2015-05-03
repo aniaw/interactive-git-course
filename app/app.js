@@ -2,6 +2,6 @@
 {
     'use strict';
 
-    angular.module('app', ['ngRoute', 'ng-terminal', 'hc.marked']);
+    angular.module('app', ['ngRoute', 'ng-terminal', 'hc.marked', 'luegg.directives']);
 
 })();

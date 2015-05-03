@@ -40,14 +40,16 @@
         };
 
         // listen terminal-output event
-        $scope.$on('terminal-output', function (event, output)
+        $scope.$on('terminal-output', function (event, session)
         {
-            $scope.results.push({type: 'text', text: [$scope.prompt.text + output.command]});
 
-            if (!output.added) {
-                output.added = true;
-                $scope.results.push(output);
+            for (var key in session) {
+                if (!session[key].added) {
+                    session[key].added = true;
+                    $scope.results.push(session[key]);
+                }
             }
+
         });
 
         //command line character limit (80)
@@ -85,6 +87,7 @@
 
         $scope.execute = function ()
         {
+
             var command = cleanNonPrintableCharacters($scope.commandLine);
 
             $scope.commandLine = '';
@@ -105,8 +108,8 @@
 
             $scope.results.push({type: 'text', text: [$scope.prompt.text + command]});
             $scope.$emit('terminal-input', command);
-
             $scope.$apply();
+
         };
 
         $scope.backspace = function ()

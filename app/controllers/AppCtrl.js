@@ -2,15 +2,18 @@
 {
     'use strict';
 
-    angular.module('app').controller('AppCtrl', function ($scope)
+    angular.module('app').controller('AppCtrl', function ($scope, $location, $anchorScroll)
     {
-        $scope.session = {
-            commands: [], output: []
-        };
+        $scope.session = [];
+        $scope.history = [];
 
         $scope.$watch('session', function (newVal, oldVal)
         {
-            //console.log(newVal);
+            $scope.terminalOutputs = newVal;
+            if (newVal !== undefined) {
+                $scope.$broadcast('terminal-output', newVal);
+
+            }
         }, true);
 
 

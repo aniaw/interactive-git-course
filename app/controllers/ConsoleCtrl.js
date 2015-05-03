@@ -3,6 +3,7 @@
     'use strict';
     angular.module('app').controller('ConsoleCtrl', function ($scope, $routeParams, $location, ChapterList)
     {
+
         var chapterId = $routeParams.id;
         var chapter = ChapterList.list[chapterId];
         var prevId = chapterId - 1;
@@ -28,37 +29,36 @@
         setTimeout(function ()
         {
             if (prevId >= 0) {
-                $scope.$broadcast('terminal-output', {
-                    output: true, command: prevChapter.command.git, text: [prevChapter.command.output]
-                });
+                $scope.$broadcast('terminal-output', $scope.terminalOutputs);
                 $scope.$apply();
             }
         }, 100);
+
+        var isCommandCorrect = function (consoleInput)
+        {
+            if (consoleInput === chapter.command.git) {
+                $scope.session.push({command: consoleInput, text: [chapter.command.output]});
+                chapterId++;
+                $location.path('/chapter/' + chapterId);
+
+            } else {
+                $scope.session.push({command: consoleInput, text: [consoleInput + ' -  you provided invalid command!']});
+                console.log('er');
+            }
+        };
 
         $scope.$on('terminal-input', function (event, consoleInput)
         {
             consoleInput = consoleInput.trim();
             if (!chapter.hasOwnProperty('add')) {
-                if (consoleInput === chapter.command.git) {
-                    $scope.session.commands.push(consoleInput);
-                    chapterId++;
-                    $location.path('/chapter/' + chapterId);
+                isCommandCorrect(consoleInput);
 
+            } else {
+                if (chapter.add.displayed) {
+                    isCommandCorrect(consoleInput);
                 } else {
-                    $scope.session.commands.push(consoleInput);
-                    console.log('er');
-                    //$scope.session.output.push({output: true, text: [err.message]});
-                }
-            } else if (chapter.hasOwnProperty('add') && chapter.add.displayed) {
-                if (consoleInput === chapter.command.git) {
-                    $scope.session.commands.push(consoleInput);
-                    chapterId++;
-                    $location.path('/chapter/' + chapterId);
+                    $scope.session.push({command: consoleInput, text: ['NOT ADD FILE']});
 
-                } else {
-                    $scope.session.commands.push(consoleInput);
-                    console.log('er');
-                    //$scope.session.output.push({output: true, text: [err.message]});
                 }
             }
         });

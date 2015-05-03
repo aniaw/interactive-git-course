@@ -1,1 +1,1 @@
-angular.module('ng-terminal', ['ngSanitize']);
+angular.module('ng-terminal', ['ngSanitize','luegg.directives']);

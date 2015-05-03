@@ -77,6 +77,7 @@
                             } else if (event.keyCode === 13) {
                                 if (scope.showPrompt || scope.allowTypingWriteDisplaying) {
                                     scope.execute();
+                                    target[0].focus();
                                 }
                             } else if (event.keyCode === 38) {
                                 if (scope.showPrompt || scope.allowTypingWriteDisplaying) {
@@ -96,15 +97,8 @@
                             return scope.results;
                         }, function (newValues, oldValues)
                         {
-
-                            scope.showPrompt = false;
-
-                            var f = [function ()
-                                     {
-                                         scope.showPrompt = true;
-                                         scope.$$phase || scope.$apply();
-                                         consoleView[0].scrollTop = consoleView[0].scrollHeight;
-                                     }];
+                            console.log(scope.session);
+                            scope.showPrompt = true;
 
                             for (var j = 0; j < newValues.length; j++) {
                                 var newValue = newValues[j];
@@ -113,14 +107,14 @@
                                 }
                                 newValue.displayed = true;
                                 if ((newValue.text[0].indexOf(':>') !== -1)) {
-                                    scope.test = newValue.text[0];
+                                    scope.history.push(newValue.text[0]);
 
-                                } else {
-                                    scope.oki = $sce.trustAsHtml(newValue.text[0]);
                                 }
-
+                                if ((newValue.text[0].indexOf(':>') === -1)) {
+                                    scope.history.push($sce.trustAsHtml(newValue.text[0]));
+                                }
+                                console.log(scope.history);
                             }
-                            f[f.length - 1]();
                         });
 
                     }
