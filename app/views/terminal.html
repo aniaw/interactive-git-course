@@ -1,7 +1,6 @@
 <div class="top col-md-12">
     <div class="col-md-2">
         <div class="panel panel-default">
-            <div class="panel-heading">Struktura projektu</div>
             <div class="panel-body">
                 <p>
                     <i class="fa fa-folder-o"></i> git-project </p>
@@ -41,7 +40,8 @@
         <div class="panel panel-default" ng-if="addition">
             <div class="panel-body">
                 <div class='text-center' ng-switch="chapterId">
-                    <div class="btn btn-success" ng-click="addFile(fileToAdd)" ng-switch-when="2">Dodaj plik do projektu</div>
+                    <div class="btn btn-success" ng-click="addFile(fileToAdd)" ng-switch-when="2">Dodaj plik index.html do projektu</div>
+                    <div class="btn btn-success" ng-click="addFile(fileToAdd)" ng-switch-when="5">Dodaj plik app.js do projektu</div>
                 </div>
             </div>
         </div>
