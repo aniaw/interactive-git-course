@@ -4,21 +4,28 @@
     angular.module('app').controller('ConsoleCtrl', function ($scope, $routeParams, $location, ChapterList)
     {
 
+
         var chapterId = $routeParams.id;
         var chapter = ChapterList.list[chapterId];
         var prevId = chapterId - 1;
         var prevChapter = ChapterList.list[prevId];
 
+        $scope.focus = true;
         $scope.chapterId = chapterId;
         $scope.fileStructure = ChapterList.list[chapterId].files;
         $scope.theory = ChapterList.list[chapterId].theory;
         $scope.exercise = ChapterList.list[chapterId].exercise;
         $scope.message = ChapterList.list[chapterId].message;
+
         if (chapter.hasOwnProperty('add')) {
             $scope.fileToAdd = ChapterList.list[chapterId].add.file;
         }
         $scope.addition = chapter.hasOwnProperty('add');
 
+
+        //ngDialog.open({
+        //    template: '<div marked="message"></div><input type="button" value="OK" ng-click="closeThisDialog()"/>', plain: true, scope: $scope
+        //});
 
         $scope.addFile = function (file)
         {
@@ -63,5 +70,7 @@
             }
         });
     });
+
+
 })();
 

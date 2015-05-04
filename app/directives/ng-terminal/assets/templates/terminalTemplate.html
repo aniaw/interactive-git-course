@@ -3,6 +3,6 @@
         <div ng-repeat="h in history track by $index" ng-bind-html="h"></div>
         <span class='terminal-prompt' ng-show='showPrompt'>{{prompt.text}}</span>
         <span class='terminal-input'>{{commandLine}}<span class='terminal-cursor'>|</span></span>
-        <input id="x" type='text' class='terminal-target' ng-model='commandLine'/>
+        <input type='text' class='terminal-target' ng-model='commandLine' focus-me="{{focus}}"/>
     </div>
 </section>

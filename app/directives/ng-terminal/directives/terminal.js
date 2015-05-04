@@ -113,7 +113,6 @@
                                 if ((newValue.text[0].indexOf(':>') === -1)) {
                                     scope.history.push($sce.trustAsHtml(newValue.text[0]));
                                 }
-                                console.log(scope.history);
                             }
                         });
 

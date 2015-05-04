@@ -2,7 +2,7 @@
 {
     'use strict';
 
-    angular.module('app').controller('AppCtrl', function ($scope, $location, $anchorScroll)
+    angular.module('app').controller('AppCtrl', function ($scope)
     {
         $scope.session = [];
         $scope.history = [];
@@ -12,10 +12,8 @@
             $scope.terminalOutputs = newVal;
             if (newVal !== undefined) {
                 $scope.$broadcast('terminal-output', newVal);
-
             }
         }, true);
-
 
     });
 

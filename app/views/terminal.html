@@ -1,12 +1,4 @@
-<div class="top col-md-offset-2 col-md-6">
-    <div class="panel panel-default">
-        <div class="panel-body">
-            <!--<div marked="message"></div>-->
-
-        </div>
-    </div>
-</div>
-<div class="col-md-12">
+<div class="top col-md-12">
     <div class="col-md-2">
         <div class="panel panel-default">
             <div class="panel-heading">Struktura projektu</div>
@@ -14,12 +6,14 @@
                 <p>
                     <i class="fa fa-folder-o"></i> git-project </p>
 
+                <p ng-if="chapterId > 0">└ <i class="fa fa-folder-o" ng-style="{color: 'grey'}"></i> <span ng-style="{color: 'grey'}">.git</span></p>
+
                 <div ng-repeat="file in fileStructure">
 
-                    <p ng-if="file.folder">    └ <i class="fa fa-folder-o" ng-style="{color: '{{file.color.file}}'}"></i> <span
+                    <p ng-if="file.folder"> └ <i class="fa fa-folder-o" ng-style="{color: '{{file.color.file}}'}"></i> <span
                             ng-style="{color: '{{file.color.text}}'}"> {{file.name}}</span></p>
 
-                    <p ng-if="!file.folder">    └ <i class="fa fa-file-o" ng-style="{color: '{{file.color.file}}'}"></i> <span
+                    <p ng-if="!file.folder"> └ <i class="fa fa-file-o" ng-style="{color: '{{file.color.file}}'}"></i> <span
                             ng-style="{color: '{{file.color.text}}'}"> {{file.name}}</span>
                     </p>
 
@@ -28,32 +22,33 @@
         </div>
     </div>
 
-    <div class="col-md-6" auto-focus="true" >
+    <div class="col-md-6">
         <terminal></terminal>
     </div>
 
     <div class="col-md-4">
-        <div class="panel panel-default">
-            <div class="panel-heading">Teoria</div>
+        <div class="panel panel-primary">
+            <div class="panel-body">
+                <div marked="exercise"></div>
+            </div>
+        </div>
+        <div class="panel panel-default" ng-if="theory">
             <div class="panel-body">
                 <div marked="theory"></div>
 
             </div>
         </div>
-        <div class="panel panel-default">
-            <div class="panel-heading">Polecenie</div>
-            <div class="panel-body">
-                <div marked="exercise">*</div>
-            </div>
-        </div>
         <div class="panel panel-default" ng-if="addition">
-            <div class="panel-heading">Interakcja</div>
             <div class="panel-body">
-                <div ng-switch="chapterId">
-                    <div class="btn btn-primary" ng-click="addFile(fileToAdd)" ng-switch-when="2">Add file</div>
+                <div class='text-center' ng-switch="chapterId">
+                    <div class="btn btn-success" ng-click="addFile(fileToAdd)" ng-switch-when="2">Dodaj plik do projektu</div>
                 </div>
             </div>
         </div>
     </div>
-
+</div>
+<div class="top col-md-12">
+    <div class="panel-body">
+        <div marked="message"></div>
+    </div>
 </div>
