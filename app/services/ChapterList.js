@@ -95,7 +95,7 @@
 
             },
             {
-                id: 6,
+                id: 7,
                 command: {
                     git: 'git status',
                     output: '<p>On branch master</p>\n<p>Initial commit</p>\n<p>Changes to be committed:<p>\n<p> (use "git rm --cached   < file>..." to unstage)<p>\n<p style="color: green"> new file: app.js</p>\n<p style="color: green"> new file: index.html</p>\n\n\n'
@@ -112,7 +112,7 @@
 
             },
             {
-                id: 7,
+                id: 8,
                 command: {
                     git: 'git commit -m "initial commit"',
                     output: '<p>[master (root-commit) 0fbc7a6] initial commit </p>   <p> 2 files changed, 17 insertions(+) </p>  <p> create mode 100644 app.js </p>                <p> create mode 100644 index.html </p>'
@@ -122,13 +122,13 @@
                     name: 'index.html', folder: false, color: {text: 'blue', file: 'black'}
 
                 }, {name: 'app.js', folder: false, color: {text: 'blue', file: 'black'}}],
-                theory: '```git commit -m "opis commita"``` - aktualny stan **plików śledzonych** zostaje zapisany i opatrzony komentarzem. \n\n ```git commit -m "add file"``` \n\n zapisuje aktualne zmiany, opatrując je komentarzem **add file**',
+                theory: '```git commit -m "opis commita"``` - aktualny stan **plików śledzonych** zostaje zapisany i opatrzony komentarzem.',
                 exercise: 'Zapisz zmiany z katalogu **git-project** wraz z komentarzem o treści **initial commit**',
                 message: 'Oba pliki oznaczone są jako ```tracked```'
 
             },
             {
-                id: 8,
+                id: 9,
                 command: {
                     git: 'git status', output: '<p>On branch master</p> <p>nothing to commit, working directory clean</p>'
                 },
@@ -136,13 +136,27 @@
                     name: 'index.html', folder: false, color: {text: 'black', file: 'black'}
 
                 }, {name: 'app.js', folder: false, color: {text: 'black', file: 'black'}}],
-                theory: '',
-                exercise: '',
-                message: ''
+                theory: 'Informacje otrzymane po wykonaniu commita to: \n\n* gałąź (branch) do której dodane zostały zmiany (**master**) \n\n* suma kontrolną SHA-1 (**0fbc7a6**), \n\n* ilość zmienionych plików (**2 files changed**) \n\n* statystyki dodanych i usuniętych linii kodu(**17 insertions(+)**)',
+                exercise: 'Pliki **index.html** oraz **app.js** zmieniły kolor. Sprawdź status zmian.',
+                message: 'Brawo! Właśnie wykonałeś swojego pierwszego commita!'
 
             },
             {
-                id: 9,
+                id: 10,
+                command: {
+                    git: 'git branch', output: '<p>* master</p>'
+                },
+                files: [{
+                    name: 'index.html', folder: false, color: {text: 'black', file: 'black'}
+
+                }, {name: 'app.js', folder: false, color: {text: 'black', file: 'black'}}],
+                theory: 'Według konwencji, lokalny aktualny katalog roboczy nazywany jest **master**. To po prostu nazwa gałęzi, którą git tworzy podczas inicjalizacji repozytorium.\n\nPolecenie ```git branch``` sprawdza czy projekt zawiera inne branche niż standardowy **master**',
+                exercise: 'Sprawdź jakie **branche** znajdują się w projekcie',
+                message: 'Posiadasz czysty katalog roboczy - nie zawiera on śledzonych ani zmodyfikowanych plików.'
+
+            },
+            {
+                id: 11,
                 command: {
                     git: '', output: ''
                 },
@@ -154,8 +168,8 @@
                 exercise: '',
                 message: ''
 
-            },
-            {}];
+            }
+         ];
 
         return chapters;
 

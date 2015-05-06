@@ -1,4 +1,11 @@
+<!--<div>--><!--<md-content class="md-padding">--><!--<md-tabs  md-border-bottom>--><!--<md-tab md-selected="selectedId" ng-repeat="chapter in chapters track by $index" ng-disabled="chapter.disabled" label="{{$index}}"></md-tab>--><!--</md-tabs>--><!--</md-content>--><!--</div>-->
+
+
 <div class="top col-md-12">
+    <div class="bottom">
+        <a class="btn btn-default" ng-click="goToChapter($index)" ng-style="isChecked($index)" ng-repeat="chapter in chapters track by $index">{{$index}}</a>
+    </div>
+
     <div class="col-md-2">
         <div class="panel panel-default">
             <div class="panel-body">
@@ -51,4 +58,4 @@
     <div class="panel-body">
         <div marked="message"></div>
     </div>
-</div>
+</div></div>

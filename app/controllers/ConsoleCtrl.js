@@ -3,14 +3,14 @@
     'use strict';
     angular.module('app').controller('ConsoleCtrl', function ($scope, $routeParams, $location, ChapterList)
     {
-
-
         var chapterId = $routeParams.id;
         var chapter = ChapterList.list[chapterId];
         var prevId = chapterId - 1;
-        var prevChapter = ChapterList.list[prevId];
+        //var nextId = Number(chapterId) + 1;
+        //var nextChapter = ChapterList.list[nextId];
 
         $scope.focus = true;
+        $scope.chapters = ChapterList.list;
         $scope.chapterId = chapterId;
         $scope.fileStructure = ChapterList.list[chapterId].files;
         $scope.theory = ChapterList.list[chapterId].theory;
@@ -22,16 +22,6 @@
         }
         $scope.addition = chapter.hasOwnProperty('add');
 
-
-        //ngDialog.open({
-        //    template: '<div marked="message"></div><input type="button" value="OK" ng-click="closeThisDialog()"/>', plain: true, scope: $scope
-        //});
-
-        $scope.addFile = function (file)
-        {
-            chapter.files.push(file);
-            chapter.add.displayed = true;
-        };
 
         setTimeout(function ()
         {
@@ -46,6 +36,7 @@
             if (consoleInput === chapter.command.git) {
                 $scope.session.push({command: consoleInput, text: [chapter.command.output]});
                 chapterId++;
+                //nextChapter.disabled = false;
                 $location.path('/chapter/' + chapterId);
 
             } else {
@@ -53,6 +44,25 @@
                 console.log('er');
             }
         };
+
+        $scope.goToChapter = function (id)
+        {
+            $location.path('/chapter/' + id);
+
+        };
+        $scope.isChecked = function (id)
+        {
+            var color = id === Number(chapterId) ? 'red' : 'black';
+            return {color: color};
+
+        };
+
+        $scope.addFile = function (file)
+        {
+            chapter.files.push(file);
+            chapter.add.displayed = true;
+        };
+
 
         $scope.$on('terminal-input', function (event, consoleInput)
         {

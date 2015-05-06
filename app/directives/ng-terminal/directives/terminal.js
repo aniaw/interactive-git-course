@@ -97,7 +97,6 @@
                             return scope.results;
                         }, function (newValues, oldValues)
                         {
-                            console.log(scope.session);
                             scope.showPrompt = true;
 
                             for (var j = 0; j < newValues.length; j++) {
