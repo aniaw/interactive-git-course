@@ -1,13 +1,12 @@
 (function ()
 {
     'use strict';
-    angular.module('app').controller('ConsoleCtrl', function ($scope, $routeParams, $location, ChapterList)
+    angular.module('app').controller('ConsoleCtrl', function ($scope, $routeParams, $location, ChapterList, $mdToast)
     {
         var chapterId = $routeParams.id;
         var chapter = ChapterList.list[chapterId];
+        var chapters = ChapterList.list;
         var prevId = chapterId - 1;
-        //var nextId = Number(chapterId) + 1;
-        //var nextChapter = ChapterList.list[nextId];
 
         $scope.focus = true;
         $scope.chapters = ChapterList.list;
@@ -16,17 +15,24 @@
         $scope.theory = ChapterList.list[chapterId].theory;
         $scope.exercise = ChapterList.list[chapterId].exercise;
         $scope.message = ChapterList.list[chapterId].message;
-
         if (chapter.hasOwnProperty('add')) {
             $scope.fileToAdd = ChapterList.list[chapterId].add.file;
+            if (chapter.add.hasOwnProperty('code')) {
+                $scope.code = ChapterList.list[chapterId].add.code;
+                $scope.replace = ChapterList.list[chapterId].add.replace;
+            }
         }
         $scope.addition = chapter.hasOwnProperty('add');
 
-
+        //$scope.closeToast = function ()
+        //{
+        //    $mdToast.hide();
+        //};
         setTimeout(function ()
         {
             if (prevId >= 0) {
                 $scope.$broadcast('terminal-output', $scope.terminalOutputs);
+                //$scope.showCustomToast();
                 $scope.$apply();
             }
         }, 100);
@@ -36,7 +42,6 @@
             if (consoleInput === chapter.command.git) {
                 $scope.session.push({command: consoleInput, text: [chapter.command.output]});
                 chapterId++;
-                //nextChapter.disabled = false;
                 $location.path('/chapter/' + chapterId);
 
             } else {
@@ -57,10 +62,24 @@
 
         };
 
+
         $scope.addFile = function (file)
         {
             chapter.files.push(file);
             chapter.add.displayed = true;
+        };
+
+        $scope.modifyFile = function (file)
+        {
+            var findFileId = chapter.files.map(function (e)
+            {
+                return e.name;
+            }).indexOf(file.name);
+
+            chapter.files[findFileId] = file;
+            $scope.code = $scope.replace;
+
+
         };
 
 

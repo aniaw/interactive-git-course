@@ -144,21 +144,86 @@
             {
                 id: 10,
                 command: {
-                    git: 'git branch', output: '<p>* master</p>'
+                    git: 'git branch', output: '<p style="color: green">* master</p>'
                 },
                 files: [{
                     name: 'index.html', folder: false, color: {text: 'black', file: 'black'}
 
                 }, {name: 'app.js', folder: false, color: {text: 'black', file: 'black'}}],
-                theory: 'Według konwencji, lokalny aktualny katalog roboczy nazywany jest **master**. To po prostu nazwa gałęzi, którą git tworzy podczas inicjalizacji repozytorium.\n\nPolecenie ```git branch``` sprawdza czy projekt zawiera inne branche niż standardowy **master**',
-                exercise: 'Sprawdź jakie **branche** znajdują się w projekcie',
+                theory: 'Według konwencji, lokalny aktualny katalog roboczy nazywany jest **master**. To nazwa gałęzi (**branch\'a**), którą git tworzy podczas inicjalizacji repozytorium.\n\nPolecenie ```git branch``` wyświetla listę gałęzi występujących w projekcie.',
+                exercise: 'Sprawdź jakie **gałęzie** znajdują się w projekcie',
                 message: 'Posiadasz czysty katalog roboczy - nie zawiera on śledzonych ani zmodyfikowanych plików.'
 
             },
             {
                 id: 11,
                 command: {
-                    git: '', output: ''
+                    git: 'git branch develop', output: ''
+                },
+                files: [{
+                    name: 'index.html', folder: false, color: {text: 'black', file: 'black'}
+
+                }, {name: 'app.js', folder: false, color: {text: 'black', file: 'black'}}],
+                theory: 'Polecenie ```git branch nazwa_nowego_brancha``` tworzy nowe **odgałęzienie** na aktualnym branchu (w tym przykładzie gałęzi **master**)',
+                exercise: 'Utwórz nową gałąź o nazwie **develop**',
+                message: 'Aktualnie w projekcie istnieje tylko gałąź **master**.'
+
+            },
+            {
+                id: 12,
+                command: {
+                    git: 'git branch', output: '<span>develop</span></br>* <span style="color: green"> master</span>'
+                },
+                files: [{
+                    name: 'index.html', folder: false, color: {text: 'black', file: 'black'}
+
+                }, {name: 'app.js', folder: false, color: {text: 'black', file: 'black'}}],
+                theory: '',
+                exercise: 'Ponownie sprawdź jakie **branch\'e** znajdują się obecnie w projekcie',
+                message: ''
+
+            },
+            {
+                id: 13,
+                command: {
+                    git: 'git checkout develop', output: 'switched to branch \'develop\''
+                },
+                files: [{
+                    name: 'index.html', folder: false, color: {text: 'black', file: 'black'}
+
+                }, {name: 'app.js', folder: false, color: {text: 'black', file: 'black'}}],
+                theory: 'Polecenie ```git branch nazwa_brancha```  tworzy nową gałąź, ale nie przełącza się na nią automatycznie.\n\nPolecenie ```git checkout nazwa_brancha``` służy m.in do przełączenia się między branchami',
+                exercise: 'Przełącz się na branch **develop**',
+                message: 'Na liście branchy pojawił się nowoutworzony branch **develop**. '
+
+            },
+            {
+                id: 14,
+                command: {
+                    git: 'git branch', output: '* <span style="color: green">develop</span></br> master</span>'
+                },
+                files: [{
+                    name: 'index.html', folder: false, color: {text: 'black', file: 'black'}
+
+                }, {name: 'app.js', folder: false, color: {text: 'black', file: 'black'}}],
+                theory: '',
+                exercise: 'Sprawdź listę **branch\'y**, aby upewnić się na gdzie się znajdujesz.',
+                message: '',
+                add: {
+                    file: {
+                        name: 'index.html', folder: false, color: {text: 'red', file: 'black'}
+                    },
+                    displayed: false,
+                    code: '<!DOCTYPE html>\n<html>\n<head lang="en">\n<meta charset="UTF-8">\n<title></title>\n</head>\n<body>\n</body>\n</html>',
+                    replace: '<!DOCTYPE html>\n<html>\n<head lang="en">\n<meta charset="UTF-8">\n<title>Exercise</title>\n</head>\n<body>\n</body>\n</html>'
+
+                }
+
+            },
+            {
+                id: 15,
+                command: {
+                    git: 'git branch', output: ''
                 },
                 files: [{
                     name: 'index.html', folder: false, color: {text: 'black', file: 'black'}
@@ -167,9 +232,7 @@
                 theory: '',
                 exercise: '',
                 message: ''
-
-            }
-         ];
+            }];
 
         return chapters;
 

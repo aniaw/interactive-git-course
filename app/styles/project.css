@@ -1,6 +1,12 @@
 .top {
     margin-top: 20px;
 }
+
 .bottom {
     margin-bottom: 20px;
+}
+
+.cycle {
+    margin: auto;
+    max-width: 90%;
 }

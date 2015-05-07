@@ -1,12 +1,12 @@
-<!--<div>--><!--<md-content class="md-padding">--><!--<md-tabs  md-border-bottom>--><!--<md-tab md-selected="selectedId" ng-repeat="chapter in chapters track by $index" ng-disabled="chapter.disabled" label="{{$index}}"></md-tab>--><!--</md-tabs>--><!--</md-content>--><!--</div>-->
-
+<!--<div>--><!--<md-content class="md-padding">--><!--<md-tabs md-selected="selectedIndex" md-border-bottom>--><!--<md-tab  ng-click="goToChapter($index)" ng-repeat="chapter in chapters track by $index" ng-disabled="chapter.disabled" label="{{$index}}"></md-tab>--><!--</md-tabs>--><!--</md-content>--><!--</div>-->
 
 <div class="top col-md-12">
     <div class="bottom">
+        <md-button class="md-raised" ng-click="showAdvanced($event)">HELP</md-button>
         <a class="btn btn-default" ng-click="goToChapter($index)" ng-style="isChecked($index)" ng-repeat="chapter in chapters track by $index">{{$index}}</a>
     </div>
-
     <div class="col-md-2">
+
         <div class="panel panel-default">
             <div class="panel-body">
                 <p>
@@ -49,13 +49,20 @@
                 <div class='text-center' ng-switch="chapterId">
                     <div class="btn btn-success" ng-click="addFile(fileToAdd)" ng-switch-when="2">Dodaj plik index.html do projektu</div>
                     <div class="btn btn-success" ng-click="addFile(fileToAdd)" ng-switch-when="5">Dodaj plik app.js do projektu</div>
+                    <div class="btn btn-success" ng-click="modifyFile(fileToAdd)" ng-switch-when="14">Zmodyfikuj plik index.html</div>
                 </div>
+            </div>
+        </div>
+        <div class="panel panel-default" ng-if="addition">
+            <div class="panel-body">
+               <pre>{{code}}</pre>
             </div>
         </div>
     </div>
 </div>
+
 <div class="top col-md-12">
     <div class="panel-body">
         <div marked="message"></div>
     </div>
-</div></div>
+</div>
