@@ -7,6 +7,11 @@
         $scope.session = [];
         $scope.history = [];
         $scope.lan = true;
+        $scope.$root.progress = 0;
+
+        $scope.isPass = function (id) {
+            return id > $scope.$root.progress;
+        };
 
         $scope.$watch('session', function (newVal, oldVal)
         {
@@ -25,14 +30,6 @@
             });
         };
 
-        //$scope.showCustomToast = function ()
-        //{
-        //    $mdToast.show({
-        //        controller: 'ConsoleCtrl', templateUrl: 'views/templates/toast.html', hideDelay: 0, position: 'bottom left right'
-        //    });
-        //};
-
     });
-
 
 })();

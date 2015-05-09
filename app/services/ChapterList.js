@@ -34,7 +34,7 @@
                 files: [],
                 theory: '',
                 exercise: 'Dodaj do projektu plik **index.html** a następnie sprawdź czy zostały wykryte zmiany w folderze **git-project**.',
-                message: 'Katalog **git-project** nie zawiera żadnych śledzonych lub zmodyfikowanych plików. Git nie widzi także żadnych plików nieśledzonych, w przeciwnym wypadku wyświetliłby ich listę.',
+                message: 'Katalog **git-project** nie zawiera żadnych śledzonych lub zmodyfikowanych plików.\n\nGit nie widzi także żadnych plików nieśledzonych, w przeciwnym wypadku wyświetliłby ich listę.',
                 add: {file: {name: 'index.html', folder: false, color: {text: 'red', file: 'black'}}, displayed: false}
             },
             {

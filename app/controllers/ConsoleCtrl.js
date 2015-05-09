@@ -1,7 +1,7 @@
 (function ()
 {
     'use strict';
-    angular.module('app').controller('ConsoleCtrl', function ($scope, $routeParams, $location, ChapterList, $mdToast)
+    angular.module('app').controller('ConsoleCtrl', function ($scope, $routeParams, $location, ChapterList)
     {
         var chapterId = $routeParams.id;
         var chapter = ChapterList.list[chapterId];
@@ -24,16 +24,12 @@
         }
         $scope.addition = chapter.hasOwnProperty('add');
 
-        //$scope.closeToast = function ()
-        //{
-        //    $mdToast.hide();
-        //};
         setTimeout(function ()
         {
             if (prevId >= 0) {
                 $scope.$broadcast('terminal-output', $scope.terminalOutputs);
-                //$scope.showCustomToast();
                 $scope.$apply();
+
             }
         }, 100);
 
@@ -42,6 +38,7 @@
             if (consoleInput === chapter.command.git) {
                 $scope.session.push({command: consoleInput, text: [chapter.command.output]});
                 chapterId++;
+                $scope.$root.progress = chapterId;
                 $location.path('/chapter/' + chapterId);
 
             } else {
@@ -57,7 +54,7 @@
         };
         $scope.isChecked = function (id)
         {
-            var color = id === Number(chapterId) ? 'red' : 'black';
+            var color = id === Number(chapterId) ? 'white' : 'black';
             return {color: color};
 
         };

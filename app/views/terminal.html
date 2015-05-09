@@ -1,9 +1,10 @@
-<!--<div>--><!--<md-content class="md-padding">--><!--<md-tabs md-selected="selectedIndex" md-border-bottom>--><!--<md-tab  ng-click="goToChapter($index)" ng-repeat="chapter in chapters track by $index" ng-disabled="chapter.disabled" label="{{$index}}"></md-tab>--><!--</md-tabs>--><!--</md-content>--><!--</div>-->
-
 <div class="top col-md-12">
     <div class="bottom">
         <md-button class="md-raised" ng-click="showAdvanced($event)">HELP</md-button>
-        <a class="btn btn-default" ng-click="goToChapter($index)" ng-style="isChecked($index)" ng-repeat="chapter in chapters track by $index">{{$index}}</a>
+        <md-button class="md-fab md-mini md-primary" ng-repeat="chapter in chapters track by $index"
+                   ng-disabled="isPass($index)" ng-click="goToChapter($index)" ng-style="isChecked($index)">
+            {{$index}}
+        </md-button>
     </div>
     <div class="col-md-2">
 
@@ -53,9 +54,9 @@
                 </div>
             </div>
         </div>
-        <div class="panel panel-default" ng-if="addition">
+        <div class="panel panel-default" ng-if="code">
             <div class="panel-body">
-               <pre>{{code}}</pre>
+                <pre>{{code}}</pre>
             </div>
         </div>
     </div>
@@ -63,6 +64,6 @@
 
 <div class="top col-md-12">
     <div class="panel-body">
-        <div marked="message"></div>
+        <div class="alert alert-success text-center" marked="message"></div>
     </div>
 </div>

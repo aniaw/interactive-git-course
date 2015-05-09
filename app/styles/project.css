@@ -10,3 +10,13 @@
     margin: auto;
     max-width: 90%;
 }
+
+.terminal-viewport {
+    margin: 0;
+    padding: 0 20px 0 10px;
+    height: 100%;
+}
+
+.terminal-viewport > div {
+    word-break: break-all;
+}
