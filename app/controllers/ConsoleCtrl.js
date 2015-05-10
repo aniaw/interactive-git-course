@@ -19,6 +19,8 @@
 
         if (chapter.hasOwnProperty('add')) {
             $scope.fileToAdd = ChapterList.list[chapterId].add.file;
+            $scope.display = ChapterList.list[chapterId].add.displayed;
+
             if (chapter.add.hasOwnProperty('code')) {
                 $scope.code = ChapterList.list[chapterId].add.code;
                 $scope.replace = ChapterList.list[chapterId].add.replace;
@@ -65,6 +67,7 @@
         {
             chapter.files.push(file);
             chapter.add.displayed = true;
+            $scope.display = true;
         };
 
         $scope.modifyFile = function (file)
@@ -77,6 +80,7 @@
             chapter.files[findFileId] = file;
             $scope.code = $scope.replace;
             chapter.add.displayed = true;
+            $scope.display = true;
         };
 
 

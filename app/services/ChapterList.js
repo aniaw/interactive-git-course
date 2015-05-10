@@ -150,7 +150,7 @@
                     name: 'index.html', folder: false, color: {text: 'black', file: 'black'}
 
                 }, {name: 'app.js', folder: false, color: {text: 'black', file: 'black'}}],
-                theory: 'Według konwencji, lokalny aktualny katalog roboczy nazywany jest **master**. To nazwa gałęzi (**branch\'a**), którą git tworzy podczas inicjalizacji repozytorium.\n\nPolecenie ```git branch``` wyświetla listę gałęzi występujących w projekcie.',
+                theory: 'Według konwencji, lokalny aktualny katalog roboczy nazywany jest **master**. To nazwa gałęzi (**brancha**), którą git tworzy podczas inicjalizacji repozytorium.\n\nPolecenie ```git branch``` wyświetla listę gałęzi występujących w projekcie.',
                 exercise: 'Sprawdź jakie **gałęzie** znajdują się w projekcie',
                 message: 'Posiadasz czysty katalog roboczy - nie zawiera on śledzonych ani zmodyfikowanych plików.'
 
@@ -179,7 +179,7 @@
 
                 }, {name: 'app.js', folder: false, color: {text: 'black', file: 'black'}}],
                 theory: '',
-                exercise: 'Ponownie sprawdź jakie **branch\'e** znajdują się obecnie w projekcie',
+                exercise: 'Ponownie sprawdź jakie **branche** znajdują się obecnie w projekcie',
                 message: ''
 
             },
@@ -207,7 +207,7 @@
 
                 }, {name: 'app.js', folder: false, color: {text: 'black', file: 'black'}}],
                 theory: '',
-                exercise: 'Sprawdź listę **branch\'y**, aby upewnić się na gdzie się znajdujesz.',
+                exercise: 'Sprawdź listę **branchy**, aby upewnić się na gdzie się znajdujesz.',
                 message: ''
 
 
@@ -252,7 +252,7 @@
             {
                 id: 17,
                 command: {
-                    git: 'git commit -m "update index.html', output: ''
+                    git: 'git commit -m "update index.html"', output: '<p>[develop 1ff6a36] update index.html</p>\n<p> 1 file changed, 1 insertion(+), 1 deletion(-)</p>'
                 },
                 files: [{
                     name: 'index.html', folder: false, color: {text: 'blue', file: 'black'}
@@ -261,6 +261,19 @@
                 theory: '',
                 exercise: 'Wykorzystaj zdobytą wiedzę aby zacommitować zmiany na branchu **develop** z opisem ***update index.html***. Nie zapomnij o tym, aby najpierw rozpocząć śledzenie pliku. ',
                 message: 'Plik **index.html** jest śledzony.'
+
+            },{
+                id: 18,
+                command: {
+                    git: 'git diff', output: ''
+                },
+                files: [{
+                    name: 'index.html', folder: false, color: {text: 'black', file: 'black'}
+
+                }, {name: 'app.js', folder: false, color: {text: 'black', file: 'black'}}],
+                theory: '',
+                exercise: '',
+                message: ''
 
             }];
 
