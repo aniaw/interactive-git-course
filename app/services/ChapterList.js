@@ -123,7 +123,7 @@
 
                 }, {name: 'app.js', folder: false, color: {text: 'blue', file: 'black'}}],
                 theory: '```git commit -m "opis commita"``` - aktualny stan **plików śledzonych** zostaje zapisany i opatrzony komentarzem.',
-                exercise: 'Zapisz zmiany z katalogu **git-project** wraz z komentarzem o treści **initial commit**',
+                exercise: 'Zapisz zmiany z katalogu **git-project** wraz z komentarzem o treści ***initial commit***',
                 message: 'Oba pliki oznaczone są jako ```tracked```'
 
             },
@@ -208,7 +208,23 @@
                 }, {name: 'app.js', folder: false, color: {text: 'black', file: 'black'}}],
                 theory: '',
                 exercise: 'Sprawdź listę **branch\'y**, aby upewnić się na gdzie się znajdujesz.',
-                message: '',
+                message: ''
+
+
+            },
+            {
+                id: 15,
+                command: {
+                    git: 'git status',
+                    output: '<p>On branch develop</p>\n<p>Changes not staged for commit:</p>\n<p>  (use "git add < file>..." to update what will be committed)</p>\n<p>  (use "git checkout -- < file>..." to discard changes in working directory)</p>\n<br/>\n<p style="color: green">        modified:   index.html</p>\n<br/>\n<p>no changes added to commit (use "git add" and/or "git commit -a")</p>\n'
+                },
+                files: [{
+                    name: 'index.html', folder: false, color: {text: 'black', file: 'black'}
+
+                }, {name: 'app.js', folder: false, color: {text: 'black', file: 'black'}}],
+                theory: '',
+                exercise: 'Poniżej przedstawiono zawartość pliku **index.html**, zmodyfikuj go a następnie sprawdź czy zmiany zostały wykryte.',
+                message: 'Znajdujesz się obecnie na branchu **develop**.',
                 add: {
                     file: {
                         name: 'index.html', folder: false, color: {text: 'red', file: 'black'}
@@ -218,20 +234,34 @@
                     replace: '<!DOCTYPE html>\n<html>\n<head lang="en">\n<meta charset="UTF-8">\n<title>Exercise</title>\n</head>\n<body>\n</body>\n</html>'
 
                 }
-
             },
             {
-                id: 15,
+                id: 16,
                 command: {
-                    git: 'git branch', output: ''
+                    git: 'git add index.html', output: ''
                 },
                 files: [{
-                    name: 'index.html', folder: false, color: {text: 'black', file: 'black'}
+                    name: 'index.html', folder: false, color: {text: 'red', file: 'black'}
 
                 }, {name: 'app.js', folder: false, color: {text: 'black', file: 'black'}}],
                 theory: '',
-                exercise: '',
-                message: ''
+                exercise: 'Wykorzystaj zdobytą wiedzę aby zacommitować zmiany na branchu **develop** z opisem ***update index.html***. Nie zapomnij o tym, aby najpierw rozpocząć śledzenie pliku. ',
+                message: 'Plik **index.html** został oznaczony jako zmodyfikowany.'
+
+            },
+            {
+                id: 17,
+                command: {
+                    git: 'git commit -m "update index.html', output: ''
+                },
+                files: [{
+                    name: 'index.html', folder: false, color: {text: 'blue', file: 'black'}
+
+                }, {name: 'app.js', folder: false, color: {text: 'black', file: 'black'}}],
+                theory: '',
+                exercise: 'Wykorzystaj zdobytą wiedzę aby zacommitować zmiany na branchu **develop** z opisem ***update index.html***. Nie zapomnij o tym, aby najpierw rozpocząć śledzenie pliku. ',
+                message: 'Plik **index.html** jest śledzony.'
+
             }];
 
         return chapters;

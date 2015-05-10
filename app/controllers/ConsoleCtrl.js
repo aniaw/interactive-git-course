@@ -15,6 +15,8 @@
         $scope.theory = ChapterList.list[chapterId].theory;
         $scope.exercise = ChapterList.list[chapterId].exercise;
         $scope.message = ChapterList.list[chapterId].message;
+        $scope.addition = chapter.hasOwnProperty('add');
+
         if (chapter.hasOwnProperty('add')) {
             $scope.fileToAdd = ChapterList.list[chapterId].add.file;
             if (chapter.add.hasOwnProperty('code')) {
@@ -22,7 +24,6 @@
                 $scope.replace = ChapterList.list[chapterId].add.replace;
             }
         }
-        $scope.addition = chapter.hasOwnProperty('add');
 
         setTimeout(function ()
         {
@@ -75,8 +76,7 @@
 
             chapter.files[findFileId] = file;
             $scope.code = $scope.replace;
-
-
+            chapter.add.displayed = true;
         };
 
 

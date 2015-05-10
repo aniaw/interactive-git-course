@@ -2,7 +2,7 @@
     <div class="bottom">
         <md-button class="md-raised" ng-click="showAdvanced($event)">HELP</md-button>
         <md-button class="md-fab md-mini md-primary" ng-repeat="chapter in chapters track by $index"
-                   ng-disabled="isPass($index)" ng-click="goToChapter($index)" ng-style="isChecked($index)">
+                   ng-click="goToChapter($index)" ng-style="isChecked($index)">
             {{$index}}
         </md-button>
     </div>
@@ -50,7 +50,7 @@
                 <div class='text-center' ng-switch="chapterId">
                     <div class="btn btn-success" ng-click="addFile(fileToAdd)" ng-switch-when="2">Dodaj plik index.html do projektu</div>
                     <div class="btn btn-success" ng-click="addFile(fileToAdd)" ng-switch-when="5">Dodaj plik app.js do projektu</div>
-                    <div class="btn btn-success" ng-click="modifyFile(fileToAdd)" ng-switch-when="14">Zmodyfikuj plik index.html</div>
+                    <div class="btn btn-success" ng-click="modifyFile(fileToAdd)" ng-switch-when="15">Zmodyfikuj plik index.html</div>
                 </div>
             </div>
         </div>
@@ -62,7 +62,7 @@
     </div>
 </div>
 
-<div class="top col-md-12">
+<div class="top col-md-12" ng-if="message">
     <div class="panel-body">
         <div class="alert alert-success text-center" marked="message"></div>
     </div>
