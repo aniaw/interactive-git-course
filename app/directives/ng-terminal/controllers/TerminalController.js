@@ -29,7 +29,6 @@
 
         $scope.init();
 
-        var commandHistory = [];
         var commandIndex = -1;
 
         // copy text to console
@@ -65,19 +64,19 @@
         // previous command with key up pressed
         $scope.previousCommand = function ()
         {
-            $scope.count = commandHistory.length;
+            $scope.count = $scope.commandHistory.length;
             if (commandIndex === -1) {
-                commandIndex = commandHistory.length;
+                commandIndex = $scope.commandHistory.length;
             }
-            $scope.commandLine = commandHistory[--commandIndex];
+            $scope.commandLine = $scope.commandHistory[--commandIndex];
             $scope.$$phase || $scope.$apply();
         };
 
         // next command with key down pressed
         $scope.nextCommand = function ()
         {
-            if (commandIndex < commandHistory.length - 1) {
-                $scope.commandLine = commandHistory[++commandIndex];
+            if (commandIndex < $scope.commandHistory.length - 1) {
+                $scope.commandLine = $scope.commandHistory[++commandIndex];
                 $scope.$$phase || $scope.$apply();
             } else {
                 $scope.commandLine = '';
@@ -97,13 +96,13 @@
             }
 
             // only 10 previous command in history
-            if (commandHistory.length > 10) {
-                commandHistory.splice(0, 1);
+            if ($scope.commandHistory.length > 10) {
+                $scope.commandHistory.splice(0, 1);
             }
 
             // don't duplicate if the last command was the same
-            if (command !== commandHistory[commandHistory.length - 1]) {
-                commandHistory.push(command);
+            if (command !== $scope.commandHistory[$scope.commandHistory.length - 1]) {
+                $scope.commandHistory.push(command);
             }
 
             $scope.results.push({type: 'text', text: [$scope.prompt.text + command]});

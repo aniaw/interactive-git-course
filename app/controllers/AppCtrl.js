@@ -6,6 +6,7 @@
     {
         $scope.session = [];
         $scope.history = [];
+        $scope.commandHistory = [];
         $scope.lan = true;
         $scope.$root.progress = 0;
 
