@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head lang="pl">
-    <title>AngularJS Tutorials</title>
+    <title>Git Tutorial</title>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css">
@@ -14,7 +14,7 @@
 <body ng-app="app">
 <div class="container" ng-controller="AppCtrl">
     <div class="top bottom" ng-controller="NavCtrl">
-        <md-button class="md-fab" id="md-primary" ng-click="showAdvanced($event)">HELP</md-button>
+        <md-button class="md-fab" id="md-help" ng-click="showAdvanced($event)">HELP</md-button>
 
         <md-button class="md-fab md-mini" id="md-primary" ng-repeat="chapter in chapters track by $index" ng-disabled="isPass($index)"
                    ng-click="goToChapter($index)" ng-style="isChecked($index)">

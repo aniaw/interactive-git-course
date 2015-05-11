@@ -25,14 +25,10 @@ body {
     background: none;
 }
 
-.full {
-    color: rgba(255, 255, 255, .8);
-    background: #d0eaff url(../images/bg.png);
-    font-size: 20px;
-}
-#md-primary {
+#md-primary, #md-help {
     background-color: #ffce7d;
 }
+
 #md-primary:disabled {
-    background-color: rgba(0,0,0,0.12);
+    background-color: rgba(0, 0, 0, 0.12);
 }

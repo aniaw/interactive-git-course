@@ -10,7 +10,6 @@
 
         $scope.isPass = function (id)
         {
-            console.log(id);
             return id > $scope.$root.progress;
         };
 
