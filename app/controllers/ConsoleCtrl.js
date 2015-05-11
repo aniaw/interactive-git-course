@@ -5,8 +5,21 @@
     {
         var chapterId = $routeParams.id;
         var chapter = ChapterList.list[chapterId];
-        var chapters = ChapterList.list;
         var prevId = chapterId - 1;
+
+        var isCommandCorrect = function (consoleInput)
+        {
+            if (consoleInput === chapter.command.git) {
+                $scope.session.push({command: consoleInput, text: [chapter.command.output]});
+                chapterId++;
+                $scope.$root.progress = chapterId;
+                $location.path('/chapter/' + chapterId);
+
+            } else {
+                $scope.session.push({command: consoleInput, text: [consoleInput + ' -  you provided invalid command!']});
+                console.log('er');
+            }
+        };
 
         $scope.focus = true;
         $scope.chapters = ChapterList.list;
@@ -29,38 +42,28 @@
 
         setTimeout(function ()
         {
-            if (prevId >= 0) {
+            if (prevId >= 0 && prevId <= 18) {
                 $scope.$broadcast('terminal-output', $scope.terminalOutputs);
                 $scope.$apply();
 
             }
         }, 100);
 
-        var isCommandCorrect = function (consoleInput)
+        $scope.$on('terminal-input', function (event, consoleInput)
         {
-            if (consoleInput === chapter.command.git) {
-                $scope.session.push({command: consoleInput, text: [chapter.command.output]});
-                chapterId++;
-                $scope.$root.progress = chapterId;
-                $location.path('/chapter/' + chapterId);
+            consoleInput = consoleInput.trim();
+            if (!chapter.hasOwnProperty('add')) {
+                isCommandCorrect(consoleInput);
 
             } else {
-                $scope.session.push({command: consoleInput, text: [consoleInput + ' -  you provided invalid command!']});
-                console.log('er');
+                if (chapter.add.displayed) {
+                    isCommandCorrect(consoleInput);
+                } else {
+                    $scope.session.push({command: consoleInput, text: ['You forgot something!']});
+
+                }
             }
-        };
-
-        $scope.goToChapter = function (id)
-        {
-            $location.path('/chapter/' + id);
-
-        };
-        $scope.isChecked = function (id)
-        {
-            var color = id === Number(chapterId) ? 'white' : 'black';
-            return {color: color};
-
-        };
+        });
 
 
         $scope.addFile = function (file)
@@ -83,24 +86,7 @@
             $scope.display = true;
         };
 
-
-        $scope.$on('terminal-input', function (event, consoleInput)
-        {
-            consoleInput = consoleInput.trim();
-            if (!chapter.hasOwnProperty('add')) {
-                isCommandCorrect(consoleInput);
-
-            } else {
-                if (chapter.add.displayed) {
-                    isCommandCorrect(consoleInput);
-                } else {
-                    $scope.session.push({command: consoleInput, text: ['NOT ADD FILE']});
-
-                }
-            }
-        });
     });
-
 
 })();
 

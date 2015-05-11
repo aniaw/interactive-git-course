@@ -2,16 +2,16 @@
 {
     'use strict';
 
-    angular.module('app').controller('AppCtrl', function ($scope, $mdDialog, $mdToast)
+    angular.module('app').controller('AppCtrl', function ($scope, $mdDialog)
     {
         $scope.session = [];
         $scope.history = [];
         $scope.commandHistory = [];
         $scope.lan = true;
-        $scope.$root.progress = 0;
 
-        $scope.isPass = function (id) {
-            return id > $scope.$root.progress;
+        $scope.setProgress = function ()
+        {
+            $scope.$root.progress = 0;
         };
 
         $scope.$watch('session', function (newVal, oldVal)
@@ -21,7 +21,6 @@
                 $scope.$broadcast('terminal-output', newVal);
             }
         }, true);
-
 
 
         $scope.showAdvanced = function (ev)

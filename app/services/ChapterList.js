@@ -252,7 +252,8 @@
             {
                 id: 17,
                 command: {
-                    git: 'git commit -m "update index.html"', output: '<p>[develop 1ff6a36] update index.html</p>\n<p> 1 file changed, 1 insertion(+), 1 deletion(-)</p>'
+                    git: 'git commit -m "update index.html"',
+                    output: '<p>[develop 1ff6a36] update index.html</p>\n<p> 1 file changed, 1 insertion(+), 1 deletion(-)</p>'
                 },
                 files: [{
                     name: 'index.html', folder: false, color: {text: 'blue', file: 'black'}
@@ -262,17 +263,18 @@
                 exercise: 'Wykorzystaj zdobytą wiedzę aby zacommitować zmiany na branchu **develop** z opisem ***update index.html***. Nie zapomnij o tym, aby najpierw rozpocząć śledzenie pliku. ',
                 message: 'Plik **index.html** jest śledzony.'
 
-            },{
+            },
+            {
                 id: 18,
                 command: {
-                    git: 'git diff', output: ''
+                    git: 'youdontwritethiscommand', output: ''
                 },
                 files: [{
                     name: 'index.html', folder: false, color: {text: 'black', file: 'black'}
 
                 }, {name: 'app.js', folder: false, color: {text: 'black', file: 'black'}}],
                 theory: '',
-                exercise: '',
+                exercise: 'Podstawy podstaw Gita opanowane!\n\n **Gratulujemy!!!** \n\n```Level 1 complete```. \n\nDziękujemy za udział w kursie :)',
                 message: ''
 
             }];
