@@ -21,6 +21,13 @@
             }
         };
 
+        var isFinally = function ()
+        {
+            if ($scope.finaly) {
+                $location.path('/end');
+            }
+        };
+
         $scope.focus = true;
         $scope.chapters = ChapterList.list;
         $scope.chapterId = chapterId;
@@ -29,6 +36,7 @@
         $scope.exercise = ChapterList.list[chapterId].exercise;
         $scope.message = ChapterList.list[chapterId].message;
         $scope.addition = chapter.hasOwnProperty('add');
+        $scope.finaly = ChapterList.list[chapterId].final;
 
         if (chapter.hasOwnProperty('add')) {
             $scope.fileToAdd = ChapterList.list[chapterId].add.file;
@@ -86,6 +94,7 @@
             $scope.display = true;
         };
 
+        isFinally();
     });
 
 })();

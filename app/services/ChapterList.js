@@ -13,7 +13,7 @@
             files: [],
             theory: '**Repozytorium** to struktura danych zawierająca historię projektu (zawartość katalogu **.git**). \n\n Polecenie ```git init``` inicjalizuje puste repozytorium (lokalne) w podkatalogu **.git** (bieżący katalog staje się katalogiem roboczym)',
             exercise: 'Znajdujesz się w katalogu **git-project**.\n Zainicjalizuj nowe repozytorium.',
-            message: 'Postępuj zgodnie z poleceniami aby przejść do następnego poziomu.'
+            message: 'Postępuj zgodnie z poleceniem w niebieskiej ramce aby przejść do następnego poziomu.'
         },
             {
                 id: 1,
@@ -275,7 +275,8 @@
                 }, {name: 'app.js', folder: false, color: {text: 'black', file: 'black'}}],
                 theory: '',
                 exercise: 'Podstawy podstaw Gita opanowane!\n\n **Gratulujemy!!!** \n\n```Level 1 complete```. \n\nDziękujemy za udział w kursie :)',
-                message: ''
+                message: '',
+                final: true
 
             }];
 
